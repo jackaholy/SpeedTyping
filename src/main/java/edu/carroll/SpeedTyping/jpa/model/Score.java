@@ -2,11 +2,7 @@ package edu.carroll.SpeedTyping.jpa.model;
 
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "score")
@@ -14,11 +10,12 @@ public class Score {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long play_id;
 
-    @Column(name = "level_id", nullable = false)
-    private String level_id;
+    @ManyToOne
+    @JoinColumn(name = "level_id", nullable = false)
+    private Level level;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -33,7 +30,6 @@ public class Score {
     }
 
     public Score(String level_id, String username, Integer date, Double time) {
-        this.level_id = level_id;
         this.username = username;
         this.date = date;
         this.time = time;
@@ -42,7 +38,6 @@ public class Score {
     @java.lang.Override
     public java.lang.String toString() {
         return "Score{" +
-                "level_id='" + level_id + '\'' +
                 ", username='" + username + '\'' +
                 ", date=" + date +
                 ", time=" + time +
@@ -55,14 +50,6 @@ public class Score {
 
     public void setPlay_id(Long play_id) {
         this.play_id = play_id;
-    }
-
-    public String getLevel_id() {
-        return level_id;
-    }
-
-    public void setLevel_id(String level_id) {
-        this.level_id = level_id;
     }
 
     public String getUsername() {
@@ -98,7 +85,7 @@ public class Score {
 
     @Override
     public int hashCode() {
-        return Objects.hash(play_id, level_id, username, date, time);
+        return Objects.hash(play_id, username, date, time);
     }
 
 }

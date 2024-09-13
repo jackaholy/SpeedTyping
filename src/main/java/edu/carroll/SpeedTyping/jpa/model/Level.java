@@ -3,6 +3,7 @@ package edu.carroll.SpeedTyping.jpa.model;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "level")
@@ -10,8 +11,11 @@ public class Level {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue
-    private Long level_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer level_id;
+
+    @OneToMany(mappedBy = "level")
+    private Set<Score> scores;
 
     @Column(name = "level_name", nullable = false)
     private String levelName;
@@ -55,14 +59,6 @@ public class Level {
 
     public void setLevelName(String levelName) {
         this.levelName = levelName;
-    }
-
-    public Long getLevel_id() {
-        return level_id;
-    }
-
-    public void setLevel_id(Long level_id) {
-        this.level_id = level_id;
     }
 
     public Integer getWordCount() {
