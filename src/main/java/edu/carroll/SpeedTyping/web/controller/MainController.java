@@ -42,13 +42,25 @@ public class MainController {
         if (result.hasErrors()) {
             return "home";
         }
-    try {
-        scoreRepo.save(score);
-        log.info("Saved score: {}", score);
-    } catch (Exception ex) {
-        result.addError(new ObjectError("globalError", "Failed to save data into database."));
-        log.error("Failed to save score object: {}", score, ex);
+        try {
+            scoreRepo.save(score);
+            log.info("Saved score: {}", score);
+        } catch (Exception ex) {
+            result.addError(new ObjectError("globalError", "Failed to save data into database."));
+            log.error("Failed to save score object: {}", score, ex);
+        }
+        return "home";
     }
-    return "home";
+
+    // Maps to the home page.
+    @GetMapping("/home")
+    public String home() {
+        return "home";
+    }
+
+    // Maps to the leaderboard page.
+    @GetMapping("/leaderboard")
+    public String leaderboard() {
+        return "leaderboard";
     }
 }
