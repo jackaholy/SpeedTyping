@@ -2,6 +2,7 @@ package edu.carroll.SpeedTyping;
 
 import java.util.List;
 
+import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
@@ -12,8 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class DbInit {
     // XXX - This is wrong on so many levels....
-    private static final String defaultUsername = "username";
-    private static final String defaultPassHash = "-1164577301";
+    private static final String defaultLevelName = "level1";
+    private static final Integer defaultWordCount = 14;
+    private static final Integer level_difficulty = 1;
+    private static final String content = "Hi, this is just a test level and should not be used later on.";
 
     private final LevelRepository levelRepo;
 
@@ -25,14 +28,10 @@ public class DbInit {
     @PostConstruct
     public void loadData() {
         // If the user doesn't exist in the database, populate it
-        // ADD CODE TO CREATE DEFAULT LEVELS
-
-        final List<Level> defaultLevels = levelRepo.findByUsernameIgnoreCase(defaultUsername);
-        if (defaultUsers.isEmpty()) {
-            Login defaultUser = new Login();
-            defaultUser.setUsername(defaultUsername);
-            defaultUser.setHashedPassword(defaultPassHash);
-            loginRepo.save(defaultUser);
+        final List<Level> defaultLevels = levelRepo.findByLevelNameIgnoreCase(defaultLevelName);
+        if (defaultLevels.isEmpty()) {
+            Level defaultLevel = new Level(defaultLevelName, defaultWordCount, level_difficulty, content);
+            levelRepo.save(defaultLevel);
         }
     }
 }

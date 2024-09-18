@@ -1,5 +1,6 @@
 package edu.carroll.SpeedTyping.web.controller;
 
+import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
@@ -35,8 +36,9 @@ public class MainController {
 
     @PostMapping("/addData")
     public String addDataPost(@Valid @ModelAttribute Score score, BindingResult result, RedirectAttributes attrs) {
-        Level level = levelRepo.findByLevelId(1L);
-        score.setLevel();
+        Level level = levelRepo.findByLevelNameIgnoreCase("level1").getFirst();
+
+        score.setLevel(level);
         if (result.hasErrors()) {
             return "home";
         }
@@ -46,9 +48,7 @@ public class MainController {
     } catch (Exception ex) {
         result.addError(new ObjectError("globalError", "Failed to save data into database."));
         log.error("Failed to save score object: {}", score, ex);
-        return "home";
     }
-    attrs.addAttribute("info", "Data added successfully");
-    return "redirect:/success";
+    return "home";
     }
 }

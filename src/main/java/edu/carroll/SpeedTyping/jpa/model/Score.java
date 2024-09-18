@@ -76,6 +76,14 @@ public class Score {
         this.time = time;
     }
 
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
