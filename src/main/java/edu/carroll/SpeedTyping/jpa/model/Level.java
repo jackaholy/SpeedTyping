@@ -7,11 +7,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "level")
-public class Level {
+public class Level  {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Integer level_id;
 
     @OneToMany(mappedBy = "level")

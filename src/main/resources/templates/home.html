@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,6 +37,13 @@
     <div class="textarea">
         <textarea name="userInput" placeholder="Type here..."></textarea>
     </div>
+    <form action="#" th:action="@{/addData}" th:object="${score}" method="post">
+        <input placeholder="username" type="text" th:field="*{username}">
+        <input placeholder="date" type="text" th:field="*{date}">
+        <input placeholder="time" type="text" th:field="*{time}">
+
+        <button type="submit">Submit</button>
+    </form>
 </div>
 <div class="container">
     <h4>WPM:</h4>
