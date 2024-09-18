@@ -10,7 +10,7 @@ public class Score {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long play_id;
 
     @ManyToOne
@@ -29,7 +29,7 @@ public class Score {
     public Score() {
     }
 
-    public Score(String level_id, String username, Integer date, Double time) {
+    public Score(String username, Integer date, Double time) {
         this.username = username;
         this.date = date;
         this.time = time;
@@ -70,6 +70,18 @@ public class Score {
 
     public Double getTime() {
         return time;
+    }
+
+    public void setTime(Double time) {
+        this.time = time;
+    }
+
+    public Level getLevel() {
+        return level;
+    }
+
+    public void setLevel(Level level) {
+        this.level = level;
     }
 
     @Override
