@@ -29,7 +29,6 @@ public class MainController {
 
     @GetMapping("/")
     public String index(Model model) {
-        System.out.println("home");
         model.addAttribute("score", new Score());
         return "home";
     }
@@ -55,12 +54,7 @@ public class MainController {
     // Maps to the home page.
     @GetMapping("/home")
     public String home() {
-        return "home";
+        return "/";
     }
 
-    // Maps to the leaderboard page.
-    @GetMapping("/leaderboard")
-    public String leaderboard() {
-        return "leaderboard";
-    }
 }
