@@ -54,12 +54,7 @@ public class MainController {
     // Maps to the home page.
     @GetMapping("/home")
     public String home() {
-        return "home";
+        return "/";
     }
 
-    // Maps to the leaderboard page.
-    @GetMapping("/leaderboard")
-    public String leaderboard() {
-        return "leaderboard";
-    }
 }

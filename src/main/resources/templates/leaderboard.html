@@ -36,29 +36,17 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
+            <th scope="col">Username</th>
+            <th scope="col">Date</th>
             <th scope="col">WPM</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Jack</td>
-            <td>Otto</td>
-            <td>70.7</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Andrew</td>
-            <td>Thornton</td>
-            <td>58.0</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Nate</td>
-            <td>William</td>
-            <td>52.9</td>
+        <tr th:each="score, stat : ${leaderboard}">
+            <th scope="row" th:text="${stat.count}">1</th>
+            <td th:text="${score.username}">First</td>
+            <td th:text="${score.date}">Last</td>
+            <td th:text="${score.time}">WPM</td>
         </tr>
         </tbody>
     </table>
