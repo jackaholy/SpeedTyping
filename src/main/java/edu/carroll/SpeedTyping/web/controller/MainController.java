@@ -29,7 +29,6 @@ public class MainController {
 
     @GetMapping("/")
     public String index(Model model) {
-        System.out.println("home");
         model.addAttribute("score", new Score());
         return "home";
     }
