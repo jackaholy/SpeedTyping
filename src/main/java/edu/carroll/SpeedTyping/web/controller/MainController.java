@@ -21,16 +21,19 @@ import jakarta.validation.Valid;
 public class MainController {
     private static final Logger log = LoggerFactory.getLogger(MainController.class);
 
-    @Autowired
-    private ScoreRepository scoreRepo;
+    private final ScoreRepository scoreRepo;
 
-    @Autowired
-    private LevelRepository levelRepo;
+    private final LevelRepository levelRepo;
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("score", new Score());
         return "home";
+    }
+
+    public MainController(ScoreRepository scoreRepo, LevelRepository levelRepo) {
+        this.scoreRepo = scoreRepo;
+        this.levelRepo = levelRepo;
     }
 
     @PostMapping("/addData")
@@ -53,8 +56,9 @@ public class MainController {
 
     // Maps to the home page.
     @GetMapping("/home")
-    public String home() {
-        return "/";
+    public String home(Model model) {
+        model.addAttribute("score", new Score());
+        return "home";
     }
 
 }

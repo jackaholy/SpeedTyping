@@ -12,11 +12,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class LeaderboardServiceImpl implements LeaderboardService {
-    @Autowired
-    private ScoreRepository scoreRepository;
+    private final ScoreRepository scoreRepository;
 
-    @Autowired
-    private LevelRepository levelRepository;
+    private final LevelRepository levelRepository;
+
+    public LeaderboardServiceImpl(ScoreRepository scoreRepository, LevelRepository levelRepository) {
+        this.scoreRepository = scoreRepository;
+        this.levelRepository = levelRepository;
+    }
 
     public List<Score> getScoresForLevel(Level level) {
         return scoreRepository.findAllByLevelOrderByTimeDesc(level);

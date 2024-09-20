@@ -12,9 +12,11 @@ import java.util.List;
 
 @Controller
 public class LeaderboardController {
+    private final LeaderboardService leaderboardService;
 
-    @Autowired
-    private LeaderboardService leaderboardService;
+    public LeaderboardController(LeaderboardService leaderboardService) {
+        this.leaderboardService = leaderboardService;
+    }
 
     @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
     public String showLeaderboard(Model model) {
