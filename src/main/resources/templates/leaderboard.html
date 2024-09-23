@@ -24,8 +24,16 @@
                     <li class="nav-item">
                         <a class="nav-link active" th:href="@{/typing}" aria-current="page">Typing</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/leaderboard}" aria-current="page">Leaderboard</a>
+                    <!-- Inner Leaderboard Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Leaderboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/leaderboard}">EASY</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard}">MEDIUM</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard}">HARD</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
