@@ -4,9 +4,9 @@ import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
+import edu.carroll.SpeedTyping.service.LeaderboardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
+import java.util.List;
+
 @Controller
 public class MainController {
     private static final Logger log = LoggerFactory.getLogger(MainController.class);
@@ -25,15 +27,20 @@ public class MainController {
 
     private final LevelRepository levelRepo;
 
+    private final LeaderboardService leaderboardService;
+
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("score", new Score());
+        List<Score> leaderboard = leaderboardService.getLeaderboard();
+        model.addAttribute("leaderboard", leaderboard);
         return "home";
     }
 
-    public MainController(ScoreRepository scoreRepo, LevelRepository levelRepo) {
+    public MainController(ScoreRepository scoreRepo, LevelRepository levelRepo, LeaderboardService leaderboardService) {
         this.scoreRepo = scoreRepo;
         this.levelRepo = levelRepo;
+        this.leaderboardService = leaderboardService;
     }
 
     @PostMapping("/addData")
@@ -42,7 +49,7 @@ public class MainController {
 
         score.setLevel(level);
         if (result.hasErrors()) {
-            return "home";
+            return "typing";
         }
         try {
             scoreRepo.save(score);
@@ -51,14 +58,20 @@ public class MainController {
             result.addError(new ObjectError("globalError", "Failed to save data into database."));
             log.error("Failed to save score object: {}", score, ex);
         }
-        return "home";
+        return "typing";
     }
 
     // Maps to the home page.
     @GetMapping("/home")
-    public String home(Model model) {
-        model.addAttribute("score", new Score());
+    public String home() {
         return "home";
+    }
+
+    // Maps to the typing page.
+    @GetMapping("/typing")
+    public String typing(Model model) {
+        model.addAttribute("score", new Score());
+        return "typing";
     }
 
 }
