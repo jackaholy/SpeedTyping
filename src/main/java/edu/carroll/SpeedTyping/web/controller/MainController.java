@@ -63,7 +63,10 @@ public class MainController {
 
     // Maps to the home page.
     @GetMapping("/home")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("score", new Score());
+        List<Score> leaderboard = leaderboardService.getLeaderboard();
+        model.addAttribute("leaderboard", leaderboard);
         return "home";
     }
 
