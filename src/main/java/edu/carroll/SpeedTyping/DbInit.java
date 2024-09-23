@@ -25,13 +25,13 @@ public class DbInit {
     }
 
     // invoked during application startup
-    @PostConstruct
-    public void loadData() {
-        // If the user doesn't exist in the database, populate it
-        final List<Level> defaultLevels = levelRepo.findByLevelNameIgnoreCase(defaultLevelName);
-        if (defaultLevels.isEmpty()) {
-            Level defaultLevel = new Level(defaultLevelName, defaultWordCount, level_difficulty, content);
-            levelRepo.save(defaultLevel);
-        }
-    }
+//    @PostConstruct
+//    public void loadData() {
+//        // If the user doesn't exist in the database, populate it
+//        final List<Level> defaultLevels = levelRepo.findByLevelNameIgnoreCase(defaultLevelName);
+//        if (defaultLevels.isEmpty()) {
+//            Level defaultLevel = new Level(defaultLevelName, defaultWordCount, level_difficulty, content);
+//            levelRepo.save(defaultLevel);
+//        }
+//    }
 }
