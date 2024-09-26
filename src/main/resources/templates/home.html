@@ -22,7 +22,18 @@
                         <a class="nav-link active" th:href="@{/home}" aria-current="page">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/leaderboard}" aria-current="page">Leaderboard</a>
+                        <a class="nav-link active" th:href="@{/typing}" aria-current="page">Typing</a>
+                    </li>
+                    <!-- Inner Leaderboard Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Leaderboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/leaderboard}">EASY</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard}">MEDIUM</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard}">HARD</a></li>
+                        </ul>
                     </li>
                 </ul>
             </div>
@@ -30,35 +41,115 @@
     </nav>
 </header>
 <body>
-<div class="container">
-    <h4>Instructions:</h4>
-    <p>Once you start typing the timer will start! Words must be entered correctly or else it will not count
-        towards your words per minute (WPM). Timer stops when the paragraph is typed out.</p>
-    <div class="textarea">
-        <textarea style="width: 100%; height: 200px;" name="userInput" placeholder="Type here..."></textarea>
-    </div>
-    <form action="#" th:action="@{/addData}" th:object="${score}" method="post">
-        <input placeholder="username" type="text" th:field="*{username}">
-        <input placeholder="date" type="text" th:field="*{date}">
-        <input placeholder="time" type="text" th:field="*{time}">
 
-        <button type="submit">Submit</button>
-    </form>
-</div>
-<div class="container">
-    <h4>WPM:</h4>
-    <p>(WPM goes here)</p>
-</div>
-<div class="container">
-    <h4>Total time:</h4>
-    <p>(Total time goes here)</p>
-</div>
+<section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom">
+    <div class="card alert alert-success">
+        <div class="card-header">
+            <b>EASY</b>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">60 Word Test</h5>
+            <p class="card-text">First time taking a typing test? This is our easiest and shortest test.</p>
+            <a class="btn btn-success" th:href="@{/typing}">Start EASY Test</a>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Date</th>
+                <th scope="col">WPM</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="score, stat : ${leaderboard}">
+                <th scope="row" th:text="${stat.count}">1</th>
+                <td th:text="${score.username}">First</td>
+                <td th:text="${score.date}">Last</td>
+                <td th:text="${score.time}">WPM</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+<section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom">
+    <div class="card alert alert-primary">
+        <div class="card-header">
+            <b>MEDIUM</b>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">70 Word Test</h5>
+            <p class="card-text">For intermediate typers who are wanting to check their typing speeds.</p>
+            <a class="btn btn-primary" th:href="@{/typing}">Start MEDIUM Test</a>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Date</th>
+                <th scope="col">WPM</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="score, stat : ${leaderboard}">
+                <th scope="row" th:text="${stat.count}">1</th>
+                <td th:text="${score.username}">First</td>
+                <td th:text="${score.date}">Last</td>
+                <td th:text="${score.time}">WPM</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+<section class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom">
+    <div class="card alert alert-danger">
+        <div class="card-header">
+            <b>HARD</b>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">80 Word Test</h5>
+            <p class="card-text">Our longest and most difficult test! Attempt if you dare. Experts only.</p>
+            <a class="btn btn-danger" th:href="@{/typing}">Start HARD Test</a>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Date</th>
+                <th scope="col">WPM</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="score, stat : ${leaderboard}">
+                <th scope="row" th:text="${stat.count}">1</th>
+                <td th:text="${score.username}">First</td>
+                <td th:text="${score.date}">Last</td>
+                <td th:text="${score.time}">WPM</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
-
 <footer class="text-center text-lg-start text-white" style="background-color: #5f2da6">
     <section
             class="d-flex justify-content-center justify-content-lg-between p-3 border-bottom"
@@ -71,7 +162,7 @@
         <a class="text-reset fw-bold"
            href="https://github.com/jackaholy/SpeedTyping">github.com/jackaholy/SpeedTyping</a>
     </div>
-    <!-- Copyright -->
+
 </footer>
 
 </html>
