@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.Random;
 
 import java.util.List;
@@ -25,9 +27,9 @@ public class ContentController {
     }
 
     @RequestMapping(value = "/typing", method = RequestMethod.GET)
-    public String typingContent(Model model) {
+    public String typingContent(@RequestParam Integer difficulty, Model model) {
         final Random random = new Random();
-        List<Level> selectedLevels = contentService.getLevelsForLevelDifficulty(1);
+        List<Level> selectedLevels = contentService.getLevelsForLevelDifficulty(difficulty);
         final int randLevel = random.nextInt(10);
         Level selectedLevel = selectedLevels.get(randLevel);
         model.addAttribute("chosenLevel", selectedLevel);

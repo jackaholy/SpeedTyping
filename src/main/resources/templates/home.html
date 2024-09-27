@@ -50,7 +50,7 @@
         <div class="card-body">
             <h5 class="card-title">60 Word Test</h5>
             <p class="card-text">First time taking a typing test? This is our easiest and shortest test.</p>
-            <a class="btn btn-success" th:href="@{/typing}">Start EASY Test</a>
+            <a class="btn btn-success" th:href="@{/typing (difficulty=1)}">Start EASY Test</a>
         </div>
     </div>
 
@@ -85,7 +85,7 @@
         <div class="card-body">
             <h5 class="card-title">70 Word Test</h5>
             <p class="card-text">For intermediate typers who are wanting to check their typing speeds.</p>
-            <a class="btn btn-primary" th:href="@{/typing}">Start MEDIUM Test</a>
+            <a class="btn btn-primary" th:href="@{/typing (difficulty=2)}">Start MEDIUM Test</a>
         </div>
     </div>
 
@@ -119,7 +119,7 @@
         <div class="card-body">
             <h5 class="card-title">80 Word Test</h5>
             <p class="card-text">Our longest and most difficult test! Attempt if you dare. Experts only.</p>
-            <a class="btn btn-danger" th:href="@{/typing}">Start HARD Test</a>
+            <a class="btn btn-danger" th:href="@{/typing (difficulty=3)}">Start HARD Test</a>
         </div>
     </div>
 
