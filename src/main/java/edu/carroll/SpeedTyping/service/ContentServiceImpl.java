@@ -18,8 +18,7 @@ public class ContentServiceImpl implements ContentService {
         this.scoreRepository = scoreRepository;
     }
 
-    @Override
-    public List<Level> getLevelsForLevel_difficulty(Integer level_difficulty) {
-        return levelRepository.findByLevel_difficulty(level_difficulty);
+    public List<Level> getLevelsForLevelDifficulty(Integer levelDifficulty) {
+        return levelRepository.findByLevelDifficulty(levelDifficulty);
     }
 }

@@ -1,5 +1,6 @@
 package edu.carroll.SpeedTyping.jpa.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.*;
@@ -21,7 +22,7 @@ public class Score {
     private String username;
 
     @Column(name = "date", nullable = false)
-    private Integer date;
+    private Date date;
 
     @Column(name = "time", nullable = false)
     private Double time;
@@ -29,7 +30,7 @@ public class Score {
     public Score() {
     }
 
-    public Score(String username, Integer date, Double time) {
+    public Score(String username, Date date, Double time) {
         this.username = username;
         this.date = date;
         this.time = time;
@@ -60,11 +61,11 @@ public class Score {
         this.username = username;
     }
 
-    public Integer getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Integer date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

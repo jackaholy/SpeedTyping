@@ -2,6 +2,7 @@ package edu.carroll.SpeedTyping.web.controller;
 
 import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
+import edu.carroll.SpeedTyping.jpa.model.Test;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
 import edu.carroll.SpeedTyping.service.LeaderboardService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -44,21 +46,25 @@ public class MainController {
     }
 
     @PostMapping("/addData")
-    public String addDataPost(@Valid @ModelAttribute Score score, BindingResult result, RedirectAttributes attrs) {
-        Level level = levelRepo.findByLevelNameIgnoreCase("level1").getFirst();
-
-        score.setLevel(level);
+    public String addDataPost(@Valid @ModelAttribute Test test, BindingResult result, RedirectAttributes attrs) {
         if (result.hasErrors()) {
-            return "typing";
+            return "leaderboard";
         }
         try {
+            // Add data from the test into a score object, then save to the database
+            Score score = new Score();
+            score.setUsername(test.getUsername());
+            score.setLevel(levelRepo.findByLevelId(test.getCurrentLevel()).getFirst());
+            // Figure out the current date and set it in the score
+            score.setDate(Calendar.getInstance().getTime());
+            score.setTime(1000.0); // TODO: Everyone gets the same time until we figure out timing
             scoreRepo.save(score);
             log.info("Saved score: {}", score);
         } catch (Exception ex) {
             result.addError(new ObjectError("globalError", "Failed to save data into database."));
-            log.error("Failed to save score object: {}", score, ex);
+            log.error("Failed to save score object: {}", test, ex);
         }
-        return "typing";
+        return "leaderboard";
     }
 
     // Maps to the home page.
@@ -68,13 +74,6 @@ public class MainController {
         List<Score> leaderboard = leaderboardService.getLeaderboard();
         model.addAttribute("leaderboard", leaderboard);
         return "home";
-    }
-
-    // Maps to the typing page.
-    @GetMapping("/typing")
-    public String typing(Model model) {
-        model.addAttribute("score", new Score());
-        return "typing";
     }
 
 }

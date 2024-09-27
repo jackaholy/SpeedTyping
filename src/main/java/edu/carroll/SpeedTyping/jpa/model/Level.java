@@ -12,7 +12,7 @@ public class Level  {
 
     @Id
     @GeneratedValue
-    private Integer level_id;
+    private Integer levelId;
 
     @OneToMany(mappedBy = "level")
     private Set<Score> scores;
@@ -24,18 +24,18 @@ public class Level  {
     private Integer wordCount;
 
     @Column(name = "level_difficulty")
-    private Integer level_difficulty;
+    private Integer levelDifficulty;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, length = 65535)
     private String content;
 
     public Level() {
     }
 
-    public Level(String levelName, Integer wordCount, Integer level_difficulty, String content) {
+    public Level(String levelName, Integer wordCount, Integer levelDifficulty, String content) {
         this.levelName = levelName;
         this.wordCount = wordCount;
-        this.level_difficulty = level_difficulty;
+        this.levelDifficulty = levelDifficulty;
         this.content = content;
     }
 
@@ -45,12 +45,12 @@ public class Level  {
         if (o == null || getClass() != o.getClass()) return false;
 
         Level level = (Level) o;
-        return Objects.equals(level_id, level.level_id);
+        return Objects.equals(levelId, level.levelId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(level_id);
+        return Objects.hashCode(levelId);
     }
 
     public String getLevelName() {
@@ -69,12 +69,12 @@ public class Level  {
         this.wordCount = wordCount;
     }
 
-    public Integer getLevel_difficulty() {
-        return level_difficulty;
+    public Integer getLevelDifficulty() {
+        return levelDifficulty;
     }
 
-    public void setLevel_difficulty(Integer level_difficulty) {
-        this.level_difficulty = level_difficulty;
+    public void setLevel_difficulty(Integer levelDifficulty) {
+        this.levelDifficulty = levelDifficulty;
     }
 
     public String getContent() {
@@ -83,5 +83,13 @@ public class Level  {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Integer getLevelId() {
+        return levelId;
+    }
+
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 }

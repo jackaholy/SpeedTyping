@@ -45,16 +45,28 @@
     <h4>Instructions:</h4>
     <p>Once you start typing the timer will start! Words must be entered correctly or else it will not count
         towards your words per minute (WPM). Timer stops when the paragraph is typed out.</p>
-    <div class="textarea">
-        <textarea style="width: 100%; height: 200px;" name="userInput" placeholder="Type here..."></textarea>
-    </div>
-    <form action="#" th:action="@{/addData}" th:object="${score}" method="post">
-        <input placeholder="username" type="text" th:field="*{username}">
-        <input placeholder="date" type="text" th:field="*{date}">
-        <input placeholder="time" type="text" th:field="*{time}">
 
+    <form action="#" th:action="@{/addData}" th:object="${test}" method="post">
+        <textarea style = "width: 100%; height: 200px;" id="typedContent" name="typedContent"></textarea>
+        <div class = "textarea">
+            <textarea style="width: 100%; height: 200px;" name="contentArea" th:text="${chosenLevel.content}" readonly></textarea>
+        </div>
+        <input type="text" th:field="*{username}" name="username" placeholder="Username">
+        <input type="number" th:field="*{time}" name="time" step="0.01" placeholder="Time">
+        <input type="hidden" th:field="*{currentLevel}">
         <button type="submit">Submit</button>
     </form>
+<!--    <div class="textarea">-->
+<!--        <textarea style="width: 100%; height: 200px;" name="userInput" placeholder="Type here..."></textarea>-->
+<!--    </div>-->
+
+<!--    <form action="#" th:action="@{/addData}" th:object="${score}" method="post">-->
+<!--        <input placeholder="username" type="text" th:field="*{username}">-->
+<!--        <input placeholder="date" type="text" th:field="*{date}">-->
+<!--        <input placeholder="time" type="text" th:field="*{time}">-->
+
+<!--        <button type="submit">Submit</button>-->
+<!--    </form>-->
 </div>
 <div class="container">
     <h4>WPM:</h4>

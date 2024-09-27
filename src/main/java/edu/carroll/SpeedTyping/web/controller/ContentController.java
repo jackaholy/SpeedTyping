@@ -2,6 +2,8 @@ package edu.carroll.SpeedTyping.web.controller;
 
 
 import edu.carroll.SpeedTyping.jpa.model.Level;
+import edu.carroll.SpeedTyping.jpa.model.Score;
+import edu.carroll.SpeedTyping.jpa.model.Test;
 import edu.carroll.SpeedTyping.service.ContentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,11 +27,13 @@ public class ContentController {
     @RequestMapping(value = "/typing", method = RequestMethod.GET)
     public String typingContent(Model model) {
         final Random random = new Random();
-        List<Level> selectedLevels = contentService.getLevelsForLevel_difficulty(1);
+        List<Level> selectedLevels = contentService.getLevelsForLevelDifficulty(1);
         final int randLevel = random.nextInt(10);
         Level selectedLevel = selectedLevels.get(randLevel);
         model.addAttribute("chosenLevel", selectedLevel);
+        Test test = new Test();
+        test.setCurrentLevel(selectedLevel.getLevelId());
+        model.addAttribute("test", test);
         return "typing";
     }
-
 }
