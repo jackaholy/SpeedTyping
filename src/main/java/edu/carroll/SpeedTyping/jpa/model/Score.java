@@ -1,7 +1,6 @@
 package edu.carroll.SpeedTyping.jpa.model;
 
 import java.util.Objects;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -27,12 +26,6 @@ public class Score {
     private Double time;
 
     public Score() {
-    }
-
-    public Score(String username, Integer date, Double time) {
-        this.username = username;
-        this.date = date;
-        this.time = time;
     }
 
     @java.lang.Override
