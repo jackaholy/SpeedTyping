@@ -36,6 +36,7 @@ public class MainController {
         model.addAttribute("score", new Score());
         List<Score> leaderboard = leaderboardService.getLeaderboard();
         model.addAttribute("leaderboard", leaderboard);
+        log.info("Switched to page: Home");
         return "home";
     }
 
@@ -73,6 +74,7 @@ public class MainController {
         model.addAttribute("score", new Score());
         List<Score> leaderboard = leaderboardService.getLeaderboard();
         model.addAttribute("leaderboard", leaderboard);
+        log.info("Switched to page: Home");
         return "home";
     }
 

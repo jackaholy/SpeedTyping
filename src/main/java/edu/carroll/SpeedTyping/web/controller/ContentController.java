@@ -2,9 +2,10 @@ package edu.carroll.SpeedTyping.web.controller;
 
 
 import edu.carroll.SpeedTyping.jpa.model.Level;
-import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.model.Test;
 import edu.carroll.SpeedTyping.service.ContentService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,8 @@ import java.util.List;
  */
 @Controller
 public class ContentController {
+    private static final Logger log = LoggerFactory.getLogger(MainController.class);
     public final ContentService contentService;
-
     public ContentController(ContentService contentService) {
         this.contentService = contentService;
     }
@@ -33,6 +34,8 @@ public class ContentController {
         final int randLevel = random.nextInt(10);
         Level selectedLevel = selectedLevels.get(randLevel);
         model.addAttribute("chosenLevel", selectedLevel);
+        // Generate log message when user selects level.
+        log.info("Chosen typing test: {}", selectedLevel.getLevelDifficultyName());
         Test test = new Test();
         test.setCurrentLevel(selectedLevel.getLevelId());
         model.addAttribute("test", test);
