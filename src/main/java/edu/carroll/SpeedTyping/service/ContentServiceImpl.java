@@ -18,7 +18,7 @@ public class ContentServiceImpl implements ContentService {
         this.scoreRepository = scoreRepository;
     }
 
-    public List<Level> getLevelsForLevelDifficulty(Integer levelDifficulty) {
-        return levelRepository.findByLevelDifficulty(levelDifficulty);
+    public List<Level> getLevelsForLeveldifficulty(Integer leveldifficulty) {
+        return levelRepository.findByLeveldifficulty(leveldifficulty);
     }
 }

@@ -34,8 +34,10 @@ public class MainController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("score", new Score());
-        List<Score> leaderboard = leaderboardService.getLeaderboard();
-        model.addAttribute("leaderboard", leaderboard);
+        // Add easy, medium, and hard leaderboards to the model with the top 5 scores
+        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(1, 5));
+        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(2, 5));
+        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(3, 5));
         return "home";
     }
 
@@ -50,29 +52,53 @@ public class MainController {
         if (result.hasErrors()) {
             return "leaderboard";
         }
+        Level testedLevel = null;
         try {
             // Add data from the test into a score object, then save to the database
             Score score = new Score();
             score.setUsername(test.getUsername());
-            score.setLevel(levelRepo.findByLevelId(test.getCurrentLevel()).getFirst());
-            // Figure out the current date and set it in the score
+            testedLevel = levelRepo.findByLevelid(test.getCurrentLevel()).getFirst();
+            score.setLevel(testedLevel);
+            // Process our data to calculate date, accuracy, and time
             score.setDate(Calendar.getInstance().getTime());
-            score.setTime(1000.0); // TODO: Everyone gets the same time until we figure out timing
+            double time = test.getTime(); // Currently assuming the passed in time is the time for typing in seconds
+            // Calculate the number of correct words typed
+            int correctWordsTyped = calculateCorrectWordsTyped(test.getTypedContent(), testedLevel.getContent());
+            double wordsPerMinute = (correctWordsTyped / time) * 60;
+            score.setTime(wordsPerMinute);
             scoreRepo.save(score);
             log.info("Saved score: {}", score);
         } catch (Exception ex) {
             result.addError(new ObjectError("globalError", "Failed to save data into database."));
             log.error("Failed to save score object: {}", test, ex);
         }
-        return "leaderboard";
+        if (testedLevel != null) {
+            return "redirect:/leaderboard?difficulty=" + testedLevel.getLeveldifficulty();
+        } else {
+            return "leaderboard";
+        }
+    }
+
+    public int calculateCorrectWordsTyped(String content, String level) {
+        int correctWordsTyped = 0;
+        String[] typedWords = content.split(" ");
+        String[] levelWords = level.split(" ");
+        for (int i = 0; i < typedWords.length; i++) {
+            if (i < levelWords.length && typedWords[i].equals(levelWords[i])) {
+                correctWordsTyped++;
+            }
+        }
+        return correctWordsTyped;
     }
 
     // Maps to the home page.
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("score", new Score());
-        List<Score> leaderboard = leaderboardService.getLeaderboard();
-        model.addAttribute("leaderboard", leaderboard);
+        // Add easy, medium, and hard leaderboards to the model with the top 5 scores
+        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(1, 5));
+        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(2, 5));
+        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(3, 5));
         return "home";
     }
 

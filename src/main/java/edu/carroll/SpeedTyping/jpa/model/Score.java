@@ -12,10 +12,10 @@ public class Score {
 
     @Id
     @GeneratedValue
-    private Long play_id;
+    private Long playid;
 
     @ManyToOne
-    @JoinColumn(name = "level_id", nullable = false)
+    @JoinColumn(name = "levelid", nullable = false)
     private Level level;
 
     @Column(name = "username", nullable = false)
@@ -45,12 +45,12 @@ public class Score {
                 '}';
     }
 
-    public Long getPlay_id() {
-        return play_id;
+    public Long getPlayid() {
+        return playid;
     }
 
-    public void setPlay_id(Long play_id) {
-        this.play_id = play_id;
+    public void setPlayid(Long playid) {
+        this.playid = playid;
     }
 
     public String getUsername() {
@@ -93,12 +93,12 @@ public class Score {
             return false;
 
         final Score otherScore = (Score)o;
-        return play_id.equals(otherScore.getPlay_id());
+        return playid.equals(otherScore.getPlayid());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(play_id, username, date, time);
+        return Objects.hash(playid, username, date, time);
     }
 
 }

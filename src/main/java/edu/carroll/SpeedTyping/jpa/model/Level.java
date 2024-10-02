@@ -12,19 +12,19 @@ public class Level  {
 
     @Id
     @GeneratedValue
-    private Integer levelId;
+    private Integer levelid;
 
     @OneToMany(mappedBy = "level")
     private Set<Score> scores;
 
-    @Column(name = "level_name", nullable = false)
-    private String levelName;
+    @Column(name = "levelname", nullable = false)
+    private String levelname;
 
-    @Column(name = "word_count", nullable = false)
-    private Integer wordCount;
+    @Column(name = "wordcount", nullable = false)
+    private Integer wordcount;
 
-    @Column(name = "level_difficulty")
-    private Integer levelDifficulty;
+    @Column(name = "leveldifficulty")
+    private Integer leveldifficulty;
 
     @Column(name = "content", nullable = false, length = 65535)
     private String content;
@@ -32,10 +32,10 @@ public class Level  {
     public Level() {
     }
 
-    public Level(String levelName, Integer wordCount, Integer levelDifficulty, String content) {
-        this.levelName = levelName;
-        this.wordCount = wordCount;
-        this.levelDifficulty = levelDifficulty;
+    public Level(String levelname, Integer wordcount, Integer leveldifficulty, String content) {
+        this.levelname = levelname;
+        this.wordcount = wordcount;
+        this.leveldifficulty = leveldifficulty;
         this.content = content;
     }
 
@@ -45,36 +45,44 @@ public class Level  {
         if (o == null || getClass() != o.getClass()) return false;
 
         Level level = (Level) o;
-        return Objects.equals(levelId, level.levelId);
+        return Objects.equals(levelid, level.levelid);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(levelId);
+        return Objects.hashCode(levelid);
     }
 
-    public String getLevelName() {
-        return levelName;
+    public Set<Score> getScores() {
+        return scores;
     }
 
-    public void setLevelName(String levelName) {
-        this.levelName = levelName;
+    public void setScores(Set<Score> scores) {
+        this.scores = scores;
     }
 
-    public Integer getWordCount() {
-        return wordCount;
+    public String getLevelname() {
+        return levelname;
     }
 
-    public void setWordCount(Integer wordCount) {
-        this.wordCount = wordCount;
+    public void setLevelname(String levelname) {
+        this.levelname = levelname;
     }
 
-    public Integer getLevelDifficulty() {
-        return levelDifficulty;
+    public Integer getWordcount() {
+        return wordcount;
     }
 
-    public void setLevel_difficulty(Integer levelDifficulty) {
-        this.levelDifficulty = levelDifficulty;
+    public void setWordcount(Integer wordcount) {
+        this.wordcount = wordcount;
+    }
+
+    public Integer getLeveldifficulty() {
+        return leveldifficulty;
+    }
+
+    public void setLeveldifficulty(Integer leveldifficulty) {
+        this.leveldifficulty = leveldifficulty;
     }
 
     public String getContent() {
@@ -85,11 +93,11 @@ public class Level  {
         this.content = content;
     }
 
-    public Integer getLevelId() {
-        return levelId;
+    public Integer getLevelid() {
+        return levelid;
     }
 
-    public void setLevelId(Integer levelId) {
-        this.levelId = levelId;
+    public void setLevelid(Integer levelid) {
+        this.levelid = levelid;
     }
 }

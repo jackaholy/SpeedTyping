@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,9 +20,15 @@ public class LeaderboardController {
         this.leaderboardService = leaderboardService;
     }
 
+    /**
+     * Retrieves the leaderboard data and adds it to the frontend model
+     *
+     * @param model the model to add the leaderboard data to
+     * @return the name of the leaderboard view
+     */
     @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
-    public String showLeaderboard(Model model) {
-        List<Score> leaderboard = leaderboardService.getLeaderboard();
+    public String showLeaderboard(@RequestParam Integer difficulty, Model model) {
+        List<Score> leaderboard = leaderboardService.getScoresForLeveldifficulty(difficulty);
         model.addAttribute("leaderboard", leaderboard);
         return "leaderboard";
     }

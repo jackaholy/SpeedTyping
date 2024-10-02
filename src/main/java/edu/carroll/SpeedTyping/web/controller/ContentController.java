@@ -29,12 +29,12 @@ public class ContentController {
     @RequestMapping(value = "/typing", method = RequestMethod.GET)
     public String typingContent(@RequestParam Integer difficulty, Model model) {
         final Random random = new Random();
-        List<Level> selectedLevels = contentService.getLevelsForLevelDifficulty(difficulty);
+        List<Level> selectedLevels = contentService.getLevelsForLeveldifficulty(difficulty);
         final int randLevel = random.nextInt(10);
         Level selectedLevel = selectedLevels.get(randLevel);
         model.addAttribute("chosenLevel", selectedLevel);
         Test test = new Test();
-        test.setCurrentLevel(selectedLevel.getLevelId());
+        test.setCurrentLevel(selectedLevel.getLevelid());
         model.addAttribute("test", test);
         return "typing";
     }

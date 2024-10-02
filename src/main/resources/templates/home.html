@@ -30,9 +30,9 @@
                             Leaderboard
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" th:href="@{/leaderboard}">EASY</a></li>
-                            <li><a class="dropdown-item" th:href="@{/leaderboard}">MEDIUM</a></li>
-                            <li><a class="dropdown-item" th:href="@{/leaderboard}">HARD</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=1)}">EASY</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=2)}">MEDIUM</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=3)}">HARD</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -65,10 +65,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="score, stat : ${leaderboard}">
+            <tr th:each="score, stat : ${easyLeaderboard}">
                 <th scope="row" th:text="${stat.count}">1</th>
                 <td th:text="${score.username}">First</td>
-                <td th:text="${score.date}">Last</td>
+                <td th:text="${#dates.format(score.date, 'MM/dd/yyyy')}">Last</td>
                 <td th:text="${score.time}">WPM</td>
             </tr>
             </tbody>
@@ -100,10 +100,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="score, stat : ${leaderboard}">
+            <tr th:each="score, stat : ${mediumLeaderboard}">
                 <th scope="row" th:text="${stat.count}">1</th>
                 <td th:text="${score.username}">First</td>
-                <td th:text="${score.date}">Last</td>
+                <td th:text="${#dates.format(score.date, 'MM/dd/yyyy')}">Last</td>
                 <td th:text="${score.time}">WPM</td>
             </tr>
             </tbody>
@@ -134,10 +134,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="score, stat : ${leaderboard}">
+            <tr th:each="score, stat : ${hardLeaderboard}">
                 <th scope="row" th:text="${stat.count}">1</th>
                 <td th:text="${score.username}">First</td>
-                <td th:text="${score.date}">Last</td>
+                <td th:text="${#dates.format(score.date, 'MM/dd/yyyy')}">Last</td>
                 <td th:text="${score.time}">WPM</td>
             </tr>
             </tbody>

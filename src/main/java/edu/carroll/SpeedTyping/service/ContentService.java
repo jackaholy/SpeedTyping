@@ -7,5 +7,5 @@ import java.util.List;
 
 @Service
 public interface ContentService {
-    List<Level> getLevelsForLevelDifficulty(Integer levelDifficulty);
+    List<Level> getLevelsForLeveldifficulty(Integer leveldifficulty);
 }
