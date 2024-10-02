@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "level")
-public class Level  {
+public class Level {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -59,6 +59,17 @@ public class Level  {
 
     public void setScores(Set<Score> scores) {
         this.scores = scores;
+    }
+
+    public String getLevelDifficultyName() {
+        if (leveldifficulty == 1) {
+            return "EASY";
+        } else if (leveldifficulty == 2) {
+            return "MEDIUM";
+        } else if (leveldifficulty == 3) {
+            return "HARD";
+        }
+        return leveldifficulty.toString();
     }
 
     public String getLevelname() {

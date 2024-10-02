@@ -38,6 +38,7 @@ public class MainController {
         model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(1, 5));
         model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(2, 5));
         model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(3, 5));
+        log.info("Switched to page: Home");
         return "home";
     }
 
@@ -99,6 +100,7 @@ public class MainController {
         model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(1, 5));
         model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(2, 5));
         model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(3, 5));
+        log.info("Switched to page: Home");
         return "home";
     }
 

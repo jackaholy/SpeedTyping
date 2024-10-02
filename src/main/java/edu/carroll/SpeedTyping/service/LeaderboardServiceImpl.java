@@ -47,7 +47,7 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     @Override
     public List<Score> getNScoresForDifficultySortByTime(Integer leveldifficulty, int n) {
         List<Score> diffLevels = getScoresForLeveldifficulty(leveldifficulty);
-        diffLevels.sort(Comparator.comparing(Score::getTime));
+        diffLevels.sort(Comparator.comparing(Score::getTime).reversed());
         // Extract the n first elements
         return diffLevels.subList(0, Math.min(n, diffLevels.size()));
     }
