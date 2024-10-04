@@ -62,13 +62,14 @@ public class MainController {
             score.setLevel(testedLevel);
             // Process our data to calculate date, accuracy, and time
             score.setDate(Calendar.getInstance().getTime());
-            double time = test.getTime(); // Currently assuming the passed in time is the time for typing in seconds
+            double timeTaken = test.getTime(); // Currently assuming the passed in time is the time for typing in seconds
             // Calculate the number of correct words typed
             int correctWordsTyped = calculateCorrectWordsTyped(test.getTypedContent(), testedLevel.getContent());
-            double wordsPerMinute = (correctWordsTyped / time) * 60;
+            double wordsPerMinute = (correctWordsTyped / timeTaken) * 60;
             score.setTime(wordsPerMinute);
             scoreRepo.save(score);
             log.info("Saved score: {}", score);
+
         } catch (Exception ex) {
             result.addError(new ObjectError("globalError", "Failed to save data into database."));
             log.error("Failed to save score object: {}", test, ex);
