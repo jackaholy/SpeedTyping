@@ -3,13 +3,13 @@ package edu.carroll.SpeedTyping.jpa.model;
 /**
  * A test will store the data we need from one play of the typing test
  */
-public class Test {
+public class TypeTest {
     private String username;
     private Double time;
     private Integer currentLevel;
     private String typedContent;
 
-    public Test() {
+    public TypeTest() {
 
     }
 

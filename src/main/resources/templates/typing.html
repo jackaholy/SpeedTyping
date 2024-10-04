@@ -46,7 +46,7 @@
     <p>Once you start typing the timer will start! Words must be entered correctly or else it will not count
         towards your words per minute (WPM). Timer stops when the paragraph is typed out.</p>
 
-    <form action="#" th:action="@{/addData}" th:object="${test}" method="post">
+    <form action="#" th:action="@{/addData}" th:object="${typeTest}" method="post">
         <div class = "textarea">
             <textarea style="width: 100%; height: 150px; border: none;" name="contentArea" th:text="${chosenLevel.content}" readonly oncopy="return false;" oncut="return false;" onpaste="return false;"></textarea>
         </div>

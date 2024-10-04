@@ -33,6 +33,10 @@ public class Level {
     }
 
     public Level(String levelname, Integer wordcount, Integer leveldifficulty, String content) {
+        // Don't allow a null leveldifficulty or outside range 1-3
+        if (leveldifficulty == null || leveldifficulty < 1 || leveldifficulty > 3) {
+            throw new IllegalArgumentException("Level difficulty must be between 1 and 3 inclusive (EASY, MEDIUM, HARD) and not null");
+        }
         this.levelname = levelname;
         this.wordcount = wordcount;
         this.leveldifficulty = leveldifficulty;
@@ -93,6 +97,9 @@ public class Level {
     }
 
     public void setLeveldifficulty(Integer leveldifficulty) {
+        if (leveldifficulty < 1 || leveldifficulty > 3) {
+            throw new IllegalArgumentException("Invalid difficulty level");
+        }
         this.leveldifficulty = leveldifficulty;
     }
 

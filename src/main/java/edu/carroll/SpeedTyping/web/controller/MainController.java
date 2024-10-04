@@ -2,7 +2,7 @@ package edu.carroll.SpeedTyping.web.controller;
 
 import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
-import edu.carroll.SpeedTyping.jpa.model.Test;
+import edu.carroll.SpeedTyping.jpa.model.TypeTest;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
 import edu.carroll.SpeedTyping.service.LeaderboardService;
@@ -19,7 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
 import java.util.Calendar;
-import java.util.List;
 
 @Controller
 public class MainController {
@@ -49,7 +48,7 @@ public class MainController {
     }
 
     @PostMapping("/addData")
-    public String addDataPost(@Valid @ModelAttribute Test test, BindingResult result, RedirectAttributes attrs) {
+    public String addDataPost(@Valid @ModelAttribute TypeTest typeTest, BindingResult result, RedirectAttributes attrs) {
         if (result.hasErrors()) {
             return "leaderboard";
         }
@@ -57,21 +56,21 @@ public class MainController {
         try {
             // Add data from the test into a score object, then save to the database
             Score score = new Score();
-            score.setUsername(test.getUsername());
-            testedLevel = levelRepo.findByLevelid(test.getCurrentLevel()).getFirst();
+            score.setUsername(typeTest.getUsername());
+            testedLevel = levelRepo.findByLevelid(typeTest.getCurrentLevel()).getFirst();
             score.setLevel(testedLevel);
             // Process our data to calculate date, accuracy, and time
             score.setDate(Calendar.getInstance().getTime());
-            double time = test.getTime(); // Currently assuming the passed in time is the time for typing in seconds
+            double time = typeTest.getTime(); // Currently assuming the passed in time is the time for typing in seconds
             // Calculate the number of correct words typed
-            int correctWordsTyped = calculateCorrectWordsTyped(test.getTypedContent(), testedLevel.getContent());
+            int correctWordsTyped = calculateCorrectWordsTyped(typeTest.getTypedContent(), testedLevel.getContent());
             double wordsPerMinute = (correctWordsTyped / time) * 60;
             score.setTime(wordsPerMinute);
             scoreRepo.save(score);
             log.info("Saved score: {}", score);
         } catch (Exception ex) {
             result.addError(new ObjectError("globalError", "Failed to save data into database."));
-            log.error("Failed to save score object: {}", test, ex);
+            log.error("Failed to save score object: {}", typeTest, ex);
         }
         if (testedLevel != null) {
             return "redirect:/leaderboard?difficulty=" + testedLevel.getLeveldifficulty();

@@ -5,7 +5,9 @@ import edu.carroll.SpeedTyping.jpa.model.Score;
 
 import java.util.List;
 
-
+/**
+ * Interface for retrieving leaderboard information.
+ */
 public interface LeaderboardService {
     List<Score> getScoresForLevel(Level level);
     List<Score> getScoresForLeveldifficulty(Integer leveldifficulty);

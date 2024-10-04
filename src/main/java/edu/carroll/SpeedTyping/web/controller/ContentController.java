@@ -2,7 +2,7 @@ package edu.carroll.SpeedTyping.web.controller;
 
 
 import edu.carroll.SpeedTyping.jpa.model.Level;
-import edu.carroll.SpeedTyping.jpa.model.Test;
+import edu.carroll.SpeedTyping.jpa.model.TypeTest;
 import edu.carroll.SpeedTyping.service.ContentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,9 +36,9 @@ public class ContentController {
         model.addAttribute("chosenLevel", selectedLevel);
         // Generate log message when user selects level.
         log.info("Chosen typing test: {}", selectedLevel.getLevelDifficultyName());
-        Test test = new Test();
-        test.setCurrentLevel(selectedLevel.getLevelid());
-        model.addAttribute("test", test);
+        TypeTest typeTest = new TypeTest();
+        typeTest.setCurrentLevel(selectedLevel.getLevelid());
+        model.addAttribute("typeTest", typeTest);
         return "typing";
     }
 }
