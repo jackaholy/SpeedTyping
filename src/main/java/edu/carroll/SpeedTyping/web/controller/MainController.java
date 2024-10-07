@@ -102,5 +102,4 @@ public class MainController {
         log.info("Switched to page: Home");
         return "home";
     }
-
 }
