@@ -1,4 +1,4 @@
-// Got with help from chatgpt.com.
+// Got with help from chatgpt.com
 let timer;
 let startTime;
 let elapsedTime = 0;
