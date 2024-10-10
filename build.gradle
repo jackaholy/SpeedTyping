@@ -21,7 +21,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'com.h2database:h2'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	runtimeOnly 'com.h2database:h2'
 	implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
 	implementation 'mysql:mysql-connector-java:8.0.27'
 	implementation 'org.jetbrains:annotations:20.1.0'
@@ -29,6 +31,10 @@ dependencies {
 //	implementation 'mysql:mysql-connector-java:9.0.1'
 }
 
-tasks.named('test') {
-	useJUnitPlatform()
+test {
+    systemProperty "spring.profiles.active", "test"
+	testLogging.showStandardStreams = true
 }
+//tasks.named('test') {
+//	useJUnitPlatform()
+//}

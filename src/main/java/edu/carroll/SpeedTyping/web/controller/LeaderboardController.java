@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * Manages leaderboard-related operations.
+ */
 @Controller
 public class LeaderboardController {
-    private static final Logger log = LoggerFactory.getLogger(MainController.class);
+    private static final Logger log = LoggerFactory.getLogger(LeaderboardController.class);
     private final LeaderboardService leaderboardService;
 
     public LeaderboardController(LeaderboardService leaderboardService) {

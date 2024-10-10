@@ -10,5 +10,6 @@ import java.util.List;
  */
 @Service
 public interface ContentService {
+    /** Get a list of levels for the specified level difficulty */
     List<Level> getLevelsForLeveldifficulty(Integer leveldifficulty);
 }
