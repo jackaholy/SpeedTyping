@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class LeaderboardServiceImpl implements LeaderboardService {
-    private static final Logger log = LoggerFactory.getLogger(MainController.class);
+    private static final Logger log = LoggerFactory.getLogger(LeaderboardServiceImpl.class);
 
     private final ScoreRepository scoreRepository;
 
