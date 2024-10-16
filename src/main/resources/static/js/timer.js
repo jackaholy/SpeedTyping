@@ -5,16 +5,6 @@ let interval = null;
 const targetContent = document.getElementById("targetContent");
 const userContent = document.getElementById("userContent");
 
-// document.getElementById("pause-timer").addEventListener("click", () => {
-//     clearInterval(int);
-// });
-//
-// document.getElementById("reset-timer").addEventListener("click", () => {
-//     clearInterval(int);
-//     [milliseconds, seconds, minutes] = [0, 0, 0];
-//     timeRef.innerHTML = "00 : 00 : 000 ";
-// });
-
 function displayTimer() {
     milliseconds += 10;
     if (milliseconds == 1000) {
