@@ -18,22 +18,33 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'com.h2database:h2'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	runtimeOnly 'com.h2database:h2'
-	implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
-	implementation 'mysql:mysql-connector-java:8.0.27'
-	implementation 'org.jetbrains:annotations:20.1.0'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-//	implementation 'mysql:mysql-connector-java:9.0.1'
+    // General application dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+    implementation 'org.jetbrains:annotations:20.1.0'
+    implementation 'mysql:mysql-connector-java:8.0.27'
+
+    // Test-scope dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.h2database:h2'
+    testImplementation 'org.slf4j:slf4j-api:2.0.12'
+    testImplementation 'org.springframework.boot:spring-boot-starter-logging'
+    testImplementation 'ch.qos.logback:logback-classic:1.5.1'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'com.h2database:h2'
+
 }
 
+//apply plugin : 'java'
+
 test {
-    systemProperty "spring.profiles.active", "test"
-	testLogging.showStandardStreams = true
+	useJUnitPlatform()
+	testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        showStandardStreams = true
+	}
 }
 //tasks.named('test') {
 //	useJUnitPlatform()
