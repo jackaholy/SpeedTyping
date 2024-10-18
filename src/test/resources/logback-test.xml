@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - [%level] - from %logger in %thread %n%msg%n%ex%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Reduce DB startup chatter -->
+    <logger name="org.hibernate" level="INFO" />
+    <logger name="com.zaxxer.hikari" level="INFO" />
+
+    <!-- Default level is INFO -->
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="Logfile" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

@@ -12,7 +12,7 @@ public class Score {
 
     @Id
     @GeneratedValue
-    private Long playid;
+    private Long playid; // TODO: Adjust to id
 
     @ManyToOne
     @JoinColumn(name = "levelid", nullable = false)
@@ -21,11 +21,11 @@ public class Score {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date", nullable = false) // TODO: submission date
     private Date date;
 
     @Column(name = "time", nullable = false)
-    private Double time;
+    private Double time; // TODO: time = WPM
 
     public Score() {
     }
@@ -36,13 +36,13 @@ public class Score {
         this.time = time;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "Score{" +
-                ", username='" + username + '\'' +
+                ", username='" + username + "'" +
                 ", date=" + date +
                 ", time=" + time +
-                '}';
+                "}"; // TODO: include id
     }
 
     public Long getPlayid() {

@@ -4,14 +4,11 @@ import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
-import edu.carroll.SpeedTyping.web.controller.MainController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -77,6 +74,10 @@ public class LeaderboardServiceImpl implements LeaderboardService {
      */
     @Override
     public List<Score> getNScoresForDifficultySortByTime(Integer leveldifficulty, int n) {
+        log.info("getNScoresForDifficultySortByTime: Retrieving {} scores for difficulty {}", n, leveldifficulty);
+        if (n < 0) {
+            throw new IllegalArgumentException("n must be greater than or equal to 0");
+        }
         List<Score> diffLevels = getScoresForLeveldifficulty(leveldifficulty);
         diffLevels.sort(Comparator.comparing(Score::getTime).reversed());
         // Extract the n first elements

@@ -3,6 +3,8 @@ package edu.carroll.SpeedTyping.service;
 import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
  */
 @Service
 public class ContentServiceImpl implements ContentService {
+    private static final Logger log = LoggerFactory.getLogger(ContentServiceImpl.class);
+
     // LevelRepository to interact with the Level data from the database.
     public final LevelRepository levelRepository;
 
@@ -38,6 +42,12 @@ public class ContentServiceImpl implements ContentService {
      * @return A list of Level objects matching the specified level difficulty.
      */
     public List<Level> getLevelsForLeveldifficulty(Integer leveldifficulty) {
+        log.info("getLevelsForLeveldifficulty: difficulty: {}", leveldifficulty);
+        if (leveldifficulty == null) {
+            throw new IllegalArgumentException("leveldifficulty cannot be null");
+        } else if (leveldifficulty < 1 || leveldifficulty > 3) {
+            throw new IllegalArgumentException("leveldifficulty must be between 1 and 3");
+        }
         return levelRepository.findByLeveldifficulty(leveldifficulty);
     }
 

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 @SpringBootTest
-public class TestTypeTest {
+public class TypeTestTest {
 
     private TypeTest testObject;
 
