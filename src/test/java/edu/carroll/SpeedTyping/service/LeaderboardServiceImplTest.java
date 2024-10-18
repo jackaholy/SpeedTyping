@@ -5,8 +5,6 @@ import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
 import org.junit.jupiter.api.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
