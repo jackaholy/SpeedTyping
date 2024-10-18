@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Controller
 public class ContentController {
-    private static final Logger log = LoggerFactory.getLogger(MainController.class);
+    private static final Logger log = LoggerFactory.getLogger(ContentController.class);
 
     public final ContentService contentService;
     public final LevelRepository levelRepo;
