@@ -4,6 +4,7 @@ import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +16,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.springframework.test.util.AssertionErrors.assertNotNull;
-import static org.springframework.test.util.AssertionErrors.assertEquals;
+import static org.springframework.test.util.AssertionErrors.*;
 
+@Transactional
 @SpringBootTest
 public class LeaderboardServiceImplTest {
     private static final Logger log = LoggerFactory.getLogger(LeaderboardServiceImplTest.class);
@@ -40,7 +41,7 @@ public class LeaderboardServiceImplTest {
         Level level = new Level();
         level.setLevelname("Level 1");
         level.setWordcount(50);
-        level.setLeveldifficulty(2);
+        level.setLeveldifficulty(Level.LevelDifficulty.MEDIUM);
         level.setContent("Hi, this is a test");
         // Create two scores for this level
         Score score1 = new Score();
@@ -63,15 +64,10 @@ public class LeaderboardServiceImplTest {
 
     @Test
     public void testGetScoresForLevelDifficulty() {
-        List<Score> scores = leaderboardService.getScoresForLeveldifficulty(2);
+        List<Score> scores = leaderboardService.getScoresForLeveldifficulty(Level.LevelDifficulty.MEDIUM);
         assertNotNull("Retrieved scores should not be null.", scores);
-        if (!scores.isEmpty()) {
-            // Choose a score and check its difficulty
-            assertEquals("The retrieved level should have a difficulty of two.", 2, scores.getFirst().getLevel().getLeveldifficulty());
-        } else {
-            System.out.println("Retrieved scores should not be empty.");
-            fail("No scores retrieved");
-        }
+        assertFalse("No scores retrieved", scores.isEmpty());
+        assertEquals("The retrieved level should have a difficulty of MEDIUM.", Level.LevelDifficulty.MEDIUM, scores.getFirst().getLevel().getLeveldifficulty());
     }
 
     // Crappy
@@ -79,8 +75,8 @@ public class LeaderboardServiceImplTest {
     // getNScoresForDifficultySortByTime: Check handling of huge 'n'
     @Test
     public void getNScoresForDifficultySortByTimeHugeN() {
-        List<Score> scores = leaderboardService.getNScoresForDifficultySortByTime(2, 10);
-        assertEquals("Two scores should have been returned because that's all we put into difficulty 2", 2, scores.size());
+        List<Score> scores = leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, 10);
+        assertEquals("Two scores should have been returned because that's all we put into difficulty MEDIUM", 2, scores.size());
     }
 
     // Crazy
@@ -89,7 +85,7 @@ public class LeaderboardServiceImplTest {
     @Test
     public void getNScoresForDifficultySortByTimeNegative() {
         assertThrows(IllegalArgumentException.class, () -> {
-            leaderboardService.getNScoresForDifficultySortByTime(2, -6);
+            leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, -6);
         });
     }
 }

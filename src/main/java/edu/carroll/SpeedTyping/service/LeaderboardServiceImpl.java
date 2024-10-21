@@ -52,8 +52,8 @@ public class LeaderboardServiceImpl implements LeaderboardService {
      * @return List of Score objects representing the scores for the specified difficulty level.
      */
     @Override
-    public List<Score> getScoresForLeveldifficulty(Integer leveldifficulty) {
-        log.info("getScoresForLeveldifficulty: Retrieving score for level {}", leveldifficulty);
+    public List<Score> getScoresForLeveldifficulty(Level.LevelDifficulty leveldifficulty) {
+        log.info("getScoresForLeveldifficulty: Retrieving score(s) for level difficulty: {}", leveldifficulty);
         // first, get the levels at the specified difficulty
         List<Level> diffLevels = levelRepository.findByLeveldifficulty(leveldifficulty);
         List<Score> scores = new ArrayList<>();
@@ -73,7 +73,7 @@ public class LeaderboardServiceImpl implements LeaderboardService {
      *  the first n scores will be returned.
      */
     @Override
-    public List<Score> getNScoresForDifficultySortByTime(Integer leveldifficulty, int n) {
+    public List<Score> getNScoresForDifficultySortByTime(Level.LevelDifficulty leveldifficulty, int n) {
         log.info("getNScoresForDifficultySortByTime: Retrieving {} scores for difficulty {}", n, leveldifficulty);
         if (n < 0) {
             throw new IllegalArgumentException("n must be greater than or equal to 0");

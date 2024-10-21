@@ -15,7 +15,7 @@ class LevelTest {
     
     @BeforeEach
     public void setUp() {
-        level = new Level("Test Level", 100, 2, "Test Content");
+        level = new Level("Test Level", 100, Level.LevelDifficulty.MEDIUM, "Test Content");
     }
 
     // Happy path tests
@@ -33,15 +33,11 @@ class LevelTest {
     }
 
     // Crappy path tests
-    @Test
-    public void testInvalidLevelDifficulty() {
-        assertThrows(IllegalArgumentException.class, () -> level.setLeveldifficulty(10));
-    }
 
     // Crazy path tests
     @Test
     public void testNullLevel() {
-        Level l = new Level(null, null, 2, null);
+        Level l = new Level(null, null, Level.LevelDifficulty.MEDIUM, null);
         assertNull(l.getLevelname());
         assertNull(l.getWordcount());
         assertNull(l.getContent());

@@ -12,9 +12,9 @@ public interface LeaderboardService {
     /** Get scores for the chosen level */
     List<Score> getScoresForLevel(Level level);
     /** Get scores for the chosen level difficulty */
-    List<Score> getScoresForLeveldifficulty(Integer leveldifficulty);
+    List<Score> getScoresForLeveldifficulty(Level.LevelDifficulty leveldifficulty);
     /** Get n number of scores by level difficulty and sort by time. If n > scores.length, return scores.length levels */
-    List<Score> getNScoresForDifficultySortByTime(Integer leveldifficulty, int n);
+    List<Score> getNScoresForDifficultySortByTime(Level.LevelDifficulty leveldifficulty, int n);
     /** Get all the levels */
     List<Level> getAllLevels();
 }

@@ -31,7 +31,7 @@ public class ContentServiceImplTest {
         Level level = new Level();
         level.setLevelname("Level 1");
         level.setWordcount(50);
-        level.setLeveldifficulty(2);
+        level.setLeveldifficulty(Level.LevelDifficulty.MEDIUM);
         level.setContent("Hi, this is a test");
         // Create two scores for this level
         Score score1 = new Score();

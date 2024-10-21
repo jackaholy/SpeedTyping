@@ -22,7 +22,7 @@
                         <a class="nav-link active" th:href="@{/home}" aria-current="page">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/typing (difficulty=2)}" aria-current="page">Typing</a>
+                        <a class="nav-link active" th:href="@{/typing (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).MEDIUM})}" aria-current="page">Typing</a>
                     </li>
                     <!-- Inner Leaderboard Dropdown -->
                     <li class="nav-item dropdown">
@@ -30,9 +30,9 @@
                             Leaderboard
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=1)}">EASY</a></li>
-                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=2)}">MEDIUM</a></li>
-                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=3)}">HARD</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).EASY})}">EASY</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).MEDIUM})}">MEDIUM</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).HARD})}">HARD</a></li>
                         </ul>
                     </li>
                 </ul>

@@ -23,8 +23,15 @@ public class Level {
     @Column(name = "wordcount", nullable = false)
     private Integer wordcount;
 
+    public enum LevelDifficulty{
+        EASY,
+        MEDIUM,
+        HARD
+    }
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "leveldifficulty")
-    private Integer leveldifficulty;
+    private LevelDifficulty leveldifficulty;
 
     @Column(name = "content", nullable = false, length = 65535)
     private String content;
@@ -32,11 +39,7 @@ public class Level {
     public Level() {
     }
 
-    public Level(String levelname, Integer wordcount, Integer leveldifficulty, String content) {
-        // Don't allow a null leveldifficulty or outside range 1-3
-        if (leveldifficulty == null || leveldifficulty < 1 || leveldifficulty > 3) {
-            throw new IllegalArgumentException("Level difficulty must be between 1 and 3 inclusive (EASY, MEDIUM, HARD) and not null");
-        }
+    public Level(String levelname, Integer wordcount, LevelDifficulty leveldifficulty, String content) {
         this.levelname = levelname;
         this.wordcount = wordcount;
         this.leveldifficulty = leveldifficulty;
@@ -66,13 +69,6 @@ public class Level {
     }
 
     public String getLevelDifficultyName() {
-        if (leveldifficulty == 1) {
-            return "EASY";
-        } else if (leveldifficulty == 2) {
-            return "MEDIUM";
-        } else if (leveldifficulty == 3) {
-            return "HARD";
-        }
         return leveldifficulty.toString();
     }
 
@@ -92,14 +88,11 @@ public class Level {
         this.wordcount = wordcount;
     }
 
-    public Integer getLeveldifficulty() {
+    public LevelDifficulty getLeveldifficulty() {
         return leveldifficulty;
     }
 
-    public void setLeveldifficulty(Integer leveldifficulty) {
-        if (leveldifficulty < 1 || leveldifficulty > 3) {
-            throw new IllegalArgumentException("Invalid difficulty level");
-        }
+    public void setLeveldifficulty(LevelDifficulty leveldifficulty) {
         this.leveldifficulty = leveldifficulty;
     }
 

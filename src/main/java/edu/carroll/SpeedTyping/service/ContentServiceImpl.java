@@ -41,12 +41,10 @@ public class ContentServiceImpl implements ContentService {
      * @param leveldifficulty The level difficulty to search for.
      * @return A list of Level objects matching the specified level difficulty.
      */
-    public List<Level> getLevelsForLeveldifficulty(Integer leveldifficulty) {
+    public List<Level> getLevelsForLeveldifficulty(Level.LevelDifficulty leveldifficulty) {
         log.info("getLevelsForLeveldifficulty: difficulty: {}", leveldifficulty);
         if (leveldifficulty == null) {
             throw new IllegalArgumentException("leveldifficulty cannot be null");
-        } else if (leveldifficulty < 1 || leveldifficulty > 3) {
-            throw new IllegalArgumentException("leveldifficulty must be between 1 and 3");
         }
         return levelRepository.findByLeveldifficulty(leveldifficulty);
     }

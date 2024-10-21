@@ -1,5 +1,6 @@
 package edu.carroll.SpeedTyping.web.controller;
 
+import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.service.LeaderboardService;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class LeaderboardController {
      * @return the name of the leaderboard view
      */
     @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
-    public String showLeaderboard(@RequestParam Integer difficulty, Model model) {
+    public String showLeaderboard(@RequestParam Level.LevelDifficulty difficulty, Model model) {
         List<Score> leaderboard = leaderboardService.getScoresForLeveldifficulty(difficulty);
         model.addAttribute("leaderboard", leaderboard);
         log.info("Switched to page: Leaderboard");

@@ -22,7 +22,7 @@
                         <a class="nav-link active" th:href="@{/home}" aria-current="page">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/typing (difficulty=2)}" aria-current="page">Typing</a>
+                        <a class="nav-link active" th:href="@{/typing (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).MEDIUM})}" aria-current="page">Typing</a>
                     </li>
                     <!-- Inner Leaderboard Dropdown -->
                     <li class="nav-item dropdown">
@@ -30,9 +30,9 @@
                             Leaderboard
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=1)}">EASY</a></li>
-                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=2)}">MEDIUM</a></li>
-                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=3)}">HARD</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).EASY})}">EASY</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).MEDIUM})}">MEDIUM</a></li>
+                            <li><a class="dropdown-item" th:href="@{/leaderboard (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).HARD})}">HARD</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -50,7 +50,7 @@
         <div class="card-body">
             <h5 class="card-title">30 Word Test</h5>
             <p class="card-text">First time taking a typing Test? This is our easiest and shortest Test.</p>
-            <a class="btn btn-success" th:href="@{/typing (difficulty=1)}">Start EASY Test</a>
+            <a class="btn btn-success" th:href="@{/typing (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).EASY})}">Start EASY Test</a>
         </div>
     </div>
 
@@ -85,7 +85,7 @@
         <div class="card-body">
             <h5 class="card-title">60 Word Test</h5>
             <p class="card-text">For intermediate typers who are wanting to check their typing speeds.</p>
-            <a class="btn btn-primary" th:href="@{/typing (difficulty=2)}">Start MEDIUM Test</a>
+            <a class="btn btn-primary" th:href="@{/typing (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).MEDIUM})}">Start MEDIUM Test</a>
         </div>
     </div>
 
@@ -119,7 +119,7 @@
         <div class="card-body">
             <h5 class="card-title">90 Word Test</h5>
             <p class="card-text">Our longest and most difficult Test! Attempt if you dare. Experts only.</p>
-            <a class="btn btn-danger" th:href="@{/typing (difficulty=3)}">Start HARD Test</a>
+            <a class="btn btn-danger" th:href="@{/typing (difficulty=${T(edu.carroll.SpeedTyping.jpa.model.Level.LevelDifficulty).HARD})}">Start HARD Test</a>
         </div>
     </div>
 

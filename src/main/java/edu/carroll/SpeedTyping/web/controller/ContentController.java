@@ -47,7 +47,7 @@ public class ContentController {
      * @return The name of the template to render for the typing content.
      */
     @RequestMapping(value = "/typing", method = RequestMethod.GET)
-    public String typingContent(@RequestParam Integer difficulty, Model model) {
+    public String typingContent(@RequestParam Level.LevelDifficulty difficulty, Model model) {
         // Get the levels for the level difficulty and pick a random level
         final Random random = new Random();
         List<Level> selectedLevels = contentService.getLevelsForLeveldifficulty(difficulty);

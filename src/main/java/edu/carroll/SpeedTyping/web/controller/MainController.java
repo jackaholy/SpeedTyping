@@ -1,5 +1,6 @@
 package edu.carroll.SpeedTyping.web.controller;
 
+import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.service.LeaderboardService;
 import org.slf4j.Logger;
@@ -27,9 +28,9 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("score", new Score());
         // Add easy, medium, and hard leaderboards to the model with the top 5 scores
-        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(1, 5));
-        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(2, 5));
-        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(3, 5));
+        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.EASY, 5));
+        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, 5));
+        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.HARD, 5));
         log.info("Switched to page: Home");
         return "home";
     }
@@ -43,9 +44,9 @@ public class MainController {
     public String home(Model model) {
         model.addAttribute("score", new Score());
         // Add easy, medium, and hard leaderboards to the model with the top 5 scores
-        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(1, 5));
-        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(2, 5));
-        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(3, 5));
+        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.EASY, 5));
+        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, 5));
+        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.HARD, 5));
         log.info("Switched to page: Home");
         return "home";
     }
