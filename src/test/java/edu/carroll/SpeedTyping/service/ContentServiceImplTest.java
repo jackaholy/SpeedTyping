@@ -8,10 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.*;
 
+import static org.springframework.test.util.AssertionErrors.*;
+
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 public class ContentServiceImplTest {
+
+    @Autowired
+    private ContentService contentService;
 
     @Autowired
     private LevelRepository levelRepo;
@@ -52,6 +58,19 @@ public class ContentServiceImplTest {
 
     // Happy
     @Test
-    public void testCalculateScore() {
+    public void testGetLevelsForLeveldifficulty() {
+        List<Level> levels = contentService.getLevelsForLeveldifficulty(Level.LevelDifficulty.MEDIUM);
+        assertEquals("Only one medium level was added so far", 1, levels.size());
+    }
+
+    // Crappy
+    @Test
+    public void testSaveDuplicateLevelid() {
+        Level level = new Level();
+        level.setLevelname("Level 2");
+        level.setWordcount(50);
+        level.setLeveldifficulty(Level.LevelDifficulty.MEDIUM);
+        level.setContent("Hi, this is another test");
+        contentService.saveLevel(level);
     }
 }

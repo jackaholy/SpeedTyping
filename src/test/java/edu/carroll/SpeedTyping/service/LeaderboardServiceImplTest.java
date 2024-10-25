@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.test.util.AssertionErrors.*;
 
 @Transactional
@@ -76,6 +75,7 @@ public class LeaderboardServiceImplTest {
     @Test
     public void getNScoresForDifficultySortByTimeHugeN() {
         List<Score> scores = leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, 10);
+        System.out.println(scores.size());
         assertEquals("Two scores should have been returned because that's all we put into difficulty MEDIUM", 2, scores.size());
     }
 

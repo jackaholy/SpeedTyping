@@ -1,8 +1,10 @@
 package edu.carroll.SpeedTyping.service;
 
 import edu.carroll.SpeedTyping.jpa.model.Level;
+import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -47,6 +49,53 @@ public class ContentServiceImpl implements ContentService {
             throw new IllegalArgumentException("leveldifficulty cannot be null");
         }
         return levelRepository.findByLeveldifficulty(leveldifficulty);
+    }
+
+    @Override
+    public Level findByLevelid(Integer currentLevel) {
+        log.info("findByLevelid: current level id = {}", currentLevel);
+        List<Level> levels = levelRepository.findByLevelid(currentLevel);
+        if (levels.isEmpty()) {
+            return null;
+        } else if (levels.size() > 1) { // Log an error, then pass through and return the first level in the list.
+            log.error("findByLevelid: more than one level found for level id = {}. Level id should be UNIQUE.", currentLevel);
+        }
+        return levels.getFirst();
+    }
+
+    @Override
+    public void saveScore(Score score) {
+        if (!score.isValid()) {
+            log.error("saveScore: This score is deemed invalid by self check");
+            return;
+        }
+        double wpm = score.getTime();
+        if (wpm > 500) {
+            log.warn("saveScore: wpm is over 500!!!");
+        }
+        scoreRepository.save(score);
+    }
+
+    @Override
+    public void saveLevel(Level level) {
+        log.info("saveLevel: level: {}", level);
+        if (level == null) {
+            log.error("saveLevel: level is null");
+            return;
+        }
+        if (level.getLevelid() != null) {
+            Level existingLevel = levelRepository.findById(level.getLevelid()).orElse(null);
+            if (existingLevel != null) {
+                log.warn("saveLevel: level already exists. Replaced level = {}", existingLevel);
+                existingLevel.setLevelname(level.getLevelname());
+                existingLevel.setWordcount(level.getWordcount());
+                existingLevel.setLeveldifficulty(level.getLeveldifficulty());
+                existingLevel.setContent(level.getContent());
+                levelRepository.save(existingLevel);
+                return;
+            }
+        }
+        levelRepository.save(level);
     }
 
 }

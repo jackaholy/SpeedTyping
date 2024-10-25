@@ -63,6 +63,7 @@
     </div>
 </div>
 
+<!-- This extracts the chosen level content form the spring model and puts it in a scope that's usable in the Javascript files (colorWords.js in particular) -->
 <script th:inline="javascript">
   var targetString = /*[[${chosenLevel.content}]]*/ '';
 </script>

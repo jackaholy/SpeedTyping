@@ -30,13 +30,9 @@ public class ContentController {
     private static final Logger log = LoggerFactory.getLogger(ContentController.class);
 
     public final ContentService contentService;
-    public final LevelRepository levelRepo;
-    public final ScoreRepository scoreRepo;
 
-    public ContentController(ContentService contentService, LevelRepository levelRepo, ScoreRepository scoreRepo) {
+    public ContentController(ContentService contentService) {
         this.contentService = contentService;
-        this.levelRepo = levelRepo;
-        this.scoreRepo = scoreRepo;
     }
 
     /**
@@ -81,16 +77,16 @@ public class ContentController {
             // Add data from the test into a score object, then save to the database
             Score score = new Score();
             score.setUsername(typeTest.getUsername());
-            testedLevel = levelRepo.findByLevelid(typeTest.getCurrentLevel()).getFirst();
+            testedLevel = contentService.findByLevelid(typeTest.getCurrentLevel());
             score.setLevel(testedLevel);
             // Process our data to calculate date, accuracy, and time
             score.setDate(Calendar.getInstance().getTime());
-            double time = typeTest.getTime(); // Currently assuming the passed in time is the time for typing in seconds
+            double time = typeTest.getTime(); // Currently assuming the passed in time is the time for typing in seconds // TODO: Add null checking
             // Calculate the number of correct words typed
             int correctWordsTyped = calculateCorrectWordsTyped(typeTest.getTypedContent(), testedLevel.getContent());
             double wordsPerMinute = (correctWordsTyped / time) * 60;
             score.setTime(wordsPerMinute);
-            scoreRepo.save(score);
+            contentService.saveScore(score);
             log.info("Saved score: {}", score);
         } catch (Exception ex) {
             result.addError(new ObjectError("globalError", "Failed to save data into database."));

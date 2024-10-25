@@ -45,6 +45,14 @@ public class Score {
                 "}"; // TODO: include id
     }
 
+    /**
+     * Tells us if the current score is valid for saving
+     * @return true if the score is valid for saving, false if not
+     */
+    public boolean isValid() {
+        return level != null && username != null && date != null && time != null;
+    }
+
     public Long getPlayid() {
         return playid;
     }
