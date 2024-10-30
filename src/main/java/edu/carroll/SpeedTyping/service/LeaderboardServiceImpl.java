@@ -81,7 +81,13 @@ public class LeaderboardServiceImpl implements LeaderboardService {
         List<Score> diffLevels = getScoresForLeveldifficulty(leveldifficulty);
         diffLevels.sort(Comparator.comparing(Score::getTime).reversed());
         // Extract the n first elements
-        return diffLevels.subList(0, Math.min(n, diffLevels.size()));
+        List<Score> subList = diffLevels.subList(0, Math.min(n, diffLevels.size()));
+        // round times to DECIMALS decimal places
+        final int DECIMALS = 1;
+        for (Score score : subList) {
+            score.setTime(Math.round(score.getTime() * Math.pow(10, DECIMALS)) / Math.pow(10, DECIMALS));
+        }
+        return subList;
     }
 
     /**

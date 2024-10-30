@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   // The variable 'targetString' will be defined in the HTML
   var targetText = document.getElementById('targetContent');
-
+  console.log("Color words");
   // Initialize the target content with spans
   var targetHTML = '';
   for (var i = 0; i < targetString.length; i++) {
