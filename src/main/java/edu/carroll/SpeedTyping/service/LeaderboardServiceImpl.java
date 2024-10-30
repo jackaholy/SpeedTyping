@@ -39,10 +39,10 @@ public class LeaderboardServiceImpl implements LeaderboardService {
      * Retrieves a list of scores for a specific level.
      *
      * @param level The level for which scores are to be retrieved.
-     * @return List of Score objects representing the scores for the specified level, ordered by time descending.
+     * @return List of Score objects representing the scores for the specified level, ordered by wpm descending.
      */
     public List<Score> getScoresForLevel(Level level) {
-        return scoreRepository.findAllByLevelOrderByTimeDesc(level);
+        return scoreRepository.findAllByLevelOrderByWpmDesc(level);
     }
 
     /**
@@ -65,27 +65,27 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     }
 
     /**
-     * Retrieves a list of 'n' number of scores for a specific level difficulty sorted by time. Return all scores if less than n.
+     * Retrieves a list of 'n' number of scores for a specific level difficulty sorted by wpm. Return all scores if less than n.
      *
      * @param leveldifficulty The difficulty level for which scores are to be retrieved.
      * @param n The number of scores to retrieve.
-     * @return List of Score objects representing the scores for the specified difficulty level, sorted by time in descending order. If the number of scores is greater than n, only
+     * @return List of Score objects representing the scores for the specified difficulty level, sorted by wpm in descending order. If the number of scores is greater than n, only
      *  the first n scores will be returned.
      */
     @Override
-    public List<Score> getNScoresForDifficultySortByTime(Level.LevelDifficulty leveldifficulty, int n) {
-        log.info("getNScoresForDifficultySortByTime: Retrieving {} scores for difficulty {}", n, leveldifficulty);
+    public List<Score> getNScoresForDifficultySortByWpm(Level.LevelDifficulty leveldifficulty, int n) {
+        log.info("getNScoresForDifficultySortByWpm: Retrieving {} scores for difficulty {}", n, leveldifficulty);
         if (n < 0) {
             throw new IllegalArgumentException("n must be greater than or equal to 0");
         }
         List<Score> diffLevels = getScoresForLeveldifficulty(leveldifficulty);
-        diffLevels.sort(Comparator.comparing(Score::getTime).reversed());
+        diffLevels.sort(Comparator.comparing(Score::getWpm).reversed());
         // Extract the n first elements
         List<Score> subList = diffLevels.subList(0, Math.min(n, diffLevels.size()));
         // round times to DECIMALS decimal places
         final int DECIMALS = 1;
         for (Score score : subList) {
-            score.setTime(Math.round(score.getTime() * Math.pow(10, DECIMALS)) / Math.pow(10, DECIMALS));
+            score.setWpm(Math.round(score.getWpm() * Math.pow(10, DECIMALS)) / Math.pow(10, DECIMALS));
         }
         return subList;
     }

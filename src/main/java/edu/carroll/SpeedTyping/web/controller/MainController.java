@@ -28,9 +28,9 @@ public class MainController {
     public String index(Model model) {
         model.addAttribute("score", new Score());
         // Add easy, medium, and hard leaderboards to the model with the top 5 scores
-        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.EASY, 5));
-        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, 5));
-        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.HARD, 5));
+        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.EASY, 5));
+        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.MEDIUM, 5));
+        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.HARD, 5));
         log.info("Switched to page: Home");
         return "home";
     }
@@ -44,9 +44,9 @@ public class MainController {
     public String home(Model model) {
         model.addAttribute("score", new Score());
         // Add easy, medium, and hard leaderboards to the model with the top 5 scores
-        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.EASY, 5));
-        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, 5));
-        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.HARD, 5));
+        model.addAttribute("easyLeaderboard", leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.EASY, 5));
+        model.addAttribute("mediumLeaderboard", leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.MEDIUM, 5));
+        model.addAttribute("hardLeaderboard", leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.HARD, 5));
         log.info("Switched to page: Home");
         return "home";
     }

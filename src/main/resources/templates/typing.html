@@ -50,9 +50,7 @@
     <form id="testForm" action="#" th:action="@{/addData}" th:object="${typeTest}" method="post">
         <div id="targetContent" class="target-content"></div>
 
-        <textarea style = "width: 100%; height: 200px;" id="userContent" name="typedContent" placeholder="Start Typing Here..."></textarea>
-<!--        <input type="number" th:field="*{time}" name="time" step="0.01" placeholder="Time">-->
-<!--        <input type="hidden" th:field="*{time}">-->
+        <textarea style = "width: 100%; height: 200px;" id="userContent" name="typedContent" placeholder="Start Typing Here..."></textarea><!-- , onpaste="return false;"></textarea> -->
         <input type="hidden" th:field="*{currentLevel}">
         <button type="submit">Submit</button>
     </form>

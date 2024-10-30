@@ -16,7 +16,7 @@ class ScoreTest {
     @BeforeEach
     public void setUp() {
         score = new Score("Test User", new Date(), 120.0);
-        score.setPlayid(1L);
+        score.setId(1L);
         score.setLevel(new Level());
     }
 
@@ -25,7 +25,7 @@ class ScoreTest {
     public void testNullScore() {
         Score s = new Score(null, null, null);
         assertNull(s.getUsername());
-        assertNull(s.getDate());
-        assertNull(s.getTime());
+        assertNull(s.getSubmissiondate());
+        assertNull(s.getWpm());
     }
 }

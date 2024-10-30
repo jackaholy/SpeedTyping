@@ -69,7 +69,7 @@ public class ContentServiceImpl implements ContentService {
             log.error("saveScore: This score is deemed invalid by self check");
             return;
         }
-        double wpm = score.getTime();
+        double wpm = score.getWpm();
         if (wpm > 500) {
             log.warn("saveScore: wpm is over 500!!!");
         }
