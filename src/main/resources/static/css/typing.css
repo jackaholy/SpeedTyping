@@ -5,3 +5,31 @@
 .incorrect {
   color: red;
 }
+
+.timer-display {
+  display: inline-block; /* Wraps tightly around the content */
+  font-size: 2rem;
+  background-color: #5f2da6;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 0 20px 0;
+
+  /* Ensure consistent width */
+  width: 40%; /* Adjust as needed */
+
+  /* Use a monospace font for consistent character widths */
+  font-family: 'SansSerif';
+
+  /* Prevent layout shift */
+  white-space: nowrap;
+
+  color: white;
+}
+
+.instructions {
+  margin: 30px 0;
+}
+
+.typing_area {
+  margin: 20px 0;
+}
