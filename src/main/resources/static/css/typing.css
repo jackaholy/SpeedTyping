@@ -7,23 +7,16 @@
 }
 
 .timer-display {
-  display: inline-block; /* Wraps tightly around the content */
+  display: inline-block;
   font-size: 2rem;
   background-color: #5f2da6;
   border-radius: 8px;
   text-align: center;
   margin: 0 0 20px 0;
-
-  /* Ensure consistent width */
-  width: 40%; /* Adjust as needed */
-
-  /* Use a monospace font for consistent character widths */
   font-family: 'SansSerif';
-
-  /* Prevent layout shift */
   white-space: nowrap;
-
   color: white;
+  width: 40%; /* Ensure consistent width */
 }
 
 .instructions {
