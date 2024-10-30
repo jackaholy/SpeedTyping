@@ -8,19 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Thought about adding a totalTime const below to help grab the time in seconds.
     // const totalTime = document.getElementById("totalTime");
 
-    function displayTimer() {
-        milliseconds += 10;
-        if (milliseconds == 1000) {
-            milliseconds = 0;
-            // ALSO thought about adding totalTime below.
-            // seconds++;
-            total_seconds++;
-            if (seconds == 60) {
-                seconds = 0;
-                minutes++;
-            }
-        }
-
+    function getFormattedTime(minutes, seconds, milliseconds) {
         let m = minutes < 10 ? "0" + minutes : minutes;
         let s = seconds < 10 ? "0" + seconds : seconds;
         let ms =
@@ -30,30 +18,49 @@ document.addEventListener('DOMContentLoaded', function () {
                     ? "0" + milliseconds
                     : milliseconds;
 
-        timeRef.innerHTML = `${m} : ${s} : ${ms}`;
+        return {m, s, ms};
     }
 
-    // MORE submitting the time functionality.
-    // function submitTime() {
-    //     // Set the total_seconds in the hidden input field
-    //     document.getElementById("total_seconds_input").value = totalTime;
-    //     document.getElementById("testForm").submit();
-    // }
-    // if (userContent.value === targetContent.value) {
-    //     submitTime();
+    function displayTimer() {
+        milliseconds += 10;
+        if (milliseconds == 1000) {
+            milliseconds = 0;
+            seconds++;
+            if (seconds == 60) {
+                seconds = 0;
+                minutes++;
+            }
+        }
 
-    //     (This may not need to be here)
-    //     clearInterval(interval);
-    //     interval = null;
-    //     totalTime.value = seconds;
+        // Call the new function to get formatted time
+        let {m, s, ms} = getFormattedTime(minutes, seconds, milliseconds);
+
+        timeRef.innerHTML = `${m} : ${s} : ${ms}`;
+    }
 
     // Start timer when user begins typing
     userContent.addEventListener("input", () => {
         if (interval === null) {
             interval = setInterval(displayTimer, 10);
         }
-        // Stop the timer if the text matches
-        if (userContent.value === targetString) {
+        // Stop the timer if the text length matches
+        if (userContent.value.length === targetString.length) {
+            let form = document.getElementById('testForm');
+            let event = new Event('submit', {
+                bubbles: true,
+                cancelable: true
+            });
+            let totalTime = minutes * 60 + seconds + milliseconds / 1000;
+            console.log("total time: ", totalTime);
+
+            const timeInput = document.createElement('input');
+            timeInput.type = 'hidden';
+            timeInput.name = 'time';
+            timeInput.value = totalTime;
+            form.appendChild(timeInput);
+
+            form.dispatchEvent(event);
+            console.log('typing complete, submit test now');
             clearInterval(interval);
             interval = null;
         }
