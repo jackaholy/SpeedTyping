@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 
 import static org.springframework.test.util.AssertionErrors.*;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @SpringBootTest
@@ -45,6 +46,12 @@ public class ContentServiceImplTest {
         assertEquals("The content is incorrect", "Hi, this is a test", returnedLevels.getFirst().getContent());
     }
 
+    @Test
+    void findByLevelid_NoneFound() {
+        Level result = contentService.findByLevelid(100);
+        assertNull("Expected null for non-existing level id, but got a level", result);
+    }
+
     // Crappy
     @Test
     @Transactional
@@ -61,14 +68,27 @@ public class ContentServiceImplTest {
         assertEquals("The level name should have been updated", "Level 2", contentService.findByLevelid(level.getId()).getLevelname());
     }
 
-        @Test
-        void getLevelsForLeveldifficulty_NoMatchingDifficulty() {
-            // Act
-            List<Level> returnedLevels = contentService.getLevelsForLeveldifficulty(Level.LevelDifficulty.HARD);
+    @Test
+    public void getLevelsForLeveldifficulty_NullInput() {
+        // Act
+        List<Level> emptyList = new LinkedList<>();
 
-            // Assert
-            assertTrue("Expected an empty list of levels for non-existing difficulty level, but got a list", returnedLevels.isEmpty());
-        }
+        // Assert
+        assertEquals("Searching for 'null' level difficulty did not return and empty list", emptyList, contentService.getLevelsForLeveldifficulty(null));
+    }
 
+    @Test
+    public void findByLevelid_NegativeInput() {
+        Level result = contentService.findByLevelid(-1);
+        assertNull("Expected null for non-existing level id, but got a level", result);
+    }
 
+    @Test
+    void getLevelsForLeveldifficulty_NoMatchingDifficulty() {
+        // Act
+        List<Level> returnedLevels = contentService.getLevelsForLeveldifficulty(Level.LevelDifficulty.HARD);
+
+        // Assert
+        assertTrue("Expected an empty list of levels for non-existing difficulty level, but got a list", returnedLevels.isEmpty());
+    }
 }

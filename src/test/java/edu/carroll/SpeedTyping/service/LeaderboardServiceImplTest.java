@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -78,6 +79,24 @@ public class LeaderboardServiceImplTest {
         assertEquals("Two scores should have been returned because that's all we put into difficulty MEDIUM", 2, scores.size());
     }
 
+    @Test
+    public void getScoresForLeveldifficulty_NullInput() {
+        List<Score> emptyScores = new LinkedList<>();
+        assertEquals("Scores retrieved for level difficulty 'null' should be an empty list", emptyScores, leaderboardService.getScoresForLeveldifficulty(null));
+    }
+
+    @Test
+    public void getScoresForDifficultySortByWpm_NullInput() {
+        List<Score> emptyScores = new LinkedList<>();
+        assertEquals("Scores retrieved for level difficulty 'null' should be an empty list", emptyScores, leaderboardService.getNScoresForDifficultySortByWpm(null, 5));
+    }
+
+    @Test
+    public void getScoresForDifficultySortByWpm_ZeroLevels() {
+        List<Score> emptyScores = new LinkedList<>();
+        assertEquals("N scores retrieved for level difficulty medium should be an empty list", emptyScores, leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.MEDIUM, 0));
+    }
+
     // Crazy
 
     // getNScoresForDifficultySortByTime: Check handling for when the program asks for negative scores
@@ -85,6 +104,13 @@ public class LeaderboardServiceImplTest {
     public void getNScoresForDifficultySortByTimeNegative() {
         assertThrows(IllegalArgumentException.class, () -> {
             leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.MEDIUM, -6);
+        });
+    }
+
+    @Test
+    public void getNScoresForDifficultySortByWpm_WeirdDifficulty() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.valueOf("banana"), 5);
         });
     }
 }

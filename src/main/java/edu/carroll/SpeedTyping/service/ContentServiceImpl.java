@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class ContentServiceImpl implements ContentService {
     public List<Level> getLevelsForLeveldifficulty(Level.LevelDifficulty leveldifficulty) {
         log.info("getLevelsForLeveldifficulty: difficulty: {}", leveldifficulty);
         if (leveldifficulty == null) {
-            throw new IllegalArgumentException("leveldifficulty cannot be null");
+            return new LinkedList<>();
         }
         return levelRepository.findByLeveldifficulty(leveldifficulty);
     }

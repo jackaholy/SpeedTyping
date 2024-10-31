@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,6 +56,9 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     public List<Score> getScoresForLeveldifficulty(Level.LevelDifficulty leveldifficulty) {
         log.info("getScoresForLeveldifficulty: Retrieving score(s) for level difficulty: {}", leveldifficulty);
         // first, get the levels at the specified difficulty
+        if (leveldifficulty == null) {
+            return new LinkedList<>();
+        }
         List<Level> diffLevels = levelRepository.findByLeveldifficulty(leveldifficulty);
         List<Score> scores = new ArrayList<>();
         // now, extract the scores from the retrieved levels.
@@ -97,16 +101,5 @@ public class LeaderboardServiceImpl implements LeaderboardService {
      */
     public List<Level> getAllLevels() {
         return levelRepository.findAll();
-    }
-
-    /**
-     * Retrieves the leaderboard by combining scores from all levels.
-     *
-     * @return List of Score objects representing the combined leaderboard with scores from all levels.
-     */
-    public List<Score> getLeaderboard() {
-        return getAllLevels().stream()
-                .flatMap(level -> getScoresForLevel(level).stream())
-                .collect(Collectors.toList());
     }
 }

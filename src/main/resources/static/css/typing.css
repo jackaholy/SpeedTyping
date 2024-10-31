@@ -4,6 +4,7 @@
 
 .incorrect {
   color: red;
+  text-decoration: line-through;
 }
 
 .timer-display {
