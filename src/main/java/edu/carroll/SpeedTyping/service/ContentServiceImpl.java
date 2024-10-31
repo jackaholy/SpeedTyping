@@ -4,12 +4,12 @@ import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * ContentServiceImpl class provides methods to retrieve content (level or levels) for a typing test.
@@ -54,13 +54,8 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public Level findByLevelid(Integer currentLevel) {
         log.info("findByLevelid: current level id = {}", currentLevel);
-        List<Level> levels = levelRepository.findByLevelid(currentLevel);
-        if (levels.isEmpty()) {
-            return null;
-        } else if (levels.size() > 1) { // Log an error, then pass through and return the first level in the list.
-            log.error("findByLevelid: more than one level found for level id = {}. Level id should be UNIQUE.", currentLevel);
-        }
-        return levels.getFirst();
+        Optional<Level> level = levelRepository.findById(currentLevel);
+        return level.orElse(null);
     }
 
     @Override
@@ -83,8 +78,8 @@ public class ContentServiceImpl implements ContentService {
             log.error("saveLevel: level is null");
             return;
         }
-        if (level.getLevelid() != null) {
-            Level existingLevel = levelRepository.findById(level.getLevelid()).orElse(null);
+        if (level.getId() != null) {
+            Level existingLevel = levelRepository.findById(level.getId()).orElse(null);
             if (existingLevel != null) {
                 log.warn("saveLevel: level already exists. Replaced level = {}", existingLevel);
                 existingLevel.setLevelname(level.getLevelname());

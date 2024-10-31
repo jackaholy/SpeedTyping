@@ -74,8 +74,7 @@ public class LeaderboardServiceImplTest {
     // getNScoresForDifficultySortByTime: Check handling of huge 'n'
     @Test
     public void getNScoresForDifficultySortByTimeHugeN() {
-        List<Score> scores = leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, 10);
-        System.out.println(scores.size());
+        List<Score> scores = leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.MEDIUM, 10);
         assertEquals("Two scores should have been returned because that's all we put into difficulty MEDIUM", 2, scores.size());
     }
 
@@ -85,7 +84,7 @@ public class LeaderboardServiceImplTest {
     @Test
     public void getNScoresForDifficultySortByTimeNegative() {
         assertThrows(IllegalArgumentException.class, () -> {
-            leaderboardService.getNScoresForDifficultySortByTime(Level.LevelDifficulty.MEDIUM, -6);
+            leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.MEDIUM, -6);
         });
     }
 }

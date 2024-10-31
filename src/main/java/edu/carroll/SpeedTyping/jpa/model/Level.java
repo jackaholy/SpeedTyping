@@ -12,7 +12,7 @@ public class Level {
 
     @Id
     @GeneratedValue
-    private Integer levelid;
+    private Integer id;
 
     @OneToMany(mappedBy = "level")
     private Set<Score> scores;
@@ -52,12 +52,12 @@ public class Level {
         if (o == null || getClass() != o.getClass()) return false;
 
         Level level = (Level) o;
-        return Objects.equals(levelid, level.levelid);
+        return Objects.equals(id, level.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(levelid);
+        return Objects.hashCode(id);
     }
 
     public Set<Score> getScores() {
@@ -104,11 +104,11 @@ public class Level {
         this.content = content;
     }
 
-    public Integer getLevelid() {
-        return levelid;
+    public Integer getId() {
+        return id;
     }
 
-    public void setLevelid(Integer levelid) {
-        this.levelid = levelid;
+    public void setId(Integer levelid) {
+        this.id = levelid;
     }
 }

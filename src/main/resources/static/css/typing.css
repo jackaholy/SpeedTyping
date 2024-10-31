@@ -5,3 +5,24 @@
 .incorrect {
   color: red;
 }
+
+.timer-display {
+  display: inline-block;
+  font-size: 2rem;
+  background-color: #5f2da6;
+  border-radius: 8px;
+  text-align: center;
+  margin: 0 0 20px 0;
+  font-family: 'SansSerif';
+  white-space: nowrap;
+  color: white;
+  width: 40%; /* Ensure consistent width */
+}
+
+.instructions {
+  margin: 30px 0;
+}
+
+.typing_area {
+  margin: 20px 0;
+}
