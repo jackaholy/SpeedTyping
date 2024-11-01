@@ -48,12 +48,40 @@ class ScoreTest {
         assertFalse(score.isValid(), "isValid() should return false when time is null.");
     }
 
+    @Test
+    void testGetPlayid_ReturnsCorrectPlayid() {
+        Long expectedPlayid = 12345L;
+        score = new Score();
+        score.setPlayid(expectedPlayid);
+
+        Long actualPlayid = score.getPlayid();
+
+        assertEquals(expectedPlayid, actualPlayid, "getPlayid() should return the correct playid value.");
+    }
+
+    @Test
+    void testGetPlayid_ReturnsNullWhenPlayidNotSet() {
+        score = new Score();
+
+        Long actualPlayid = score.getPlayid();
+
+        // Assert
+        assertNull(actualPlayid, "getPlayid() should return null if playid is not set.");
+    }
+
+    @Test
+    void testHashCode_ConsistentHashCode() {
+        int hashCode1 = score.hashCode();
+        int hashCode2 = score.hashCode();
+        assertEquals(hashCode1, hashCode2, "hashCode() should return the same value on multiple calls with the same state.");
+    }
+
     // Crazy path tests
     @Test
     public void testNullScore() {
-        Score s = new Score(null, null, null);
-        assertNull(s.getUsername());
-        assertNull(s.getDate());
-        assertNull(s.getTime());
+        score = new Score(null, null, null);
+        assertNull(score.getUsername());
+        assertNull(score.getDate());
+        assertNull(score.getTime());
     }
 }
