@@ -21,10 +21,8 @@ class LevelTest {
     // Happy path tests
     @Test
     public void testLevelId() {
-        level.setLevelid(1);
-        assertEquals(1, level.getLevelid());
-        log.info("REMOVE LATER: Testing logging");
-        System.out.println("REMOVE LATER: Testing logging (sout)");
+        level.setId(1);
+        assertEquals(1, level.getId());
     }
 
     @Test

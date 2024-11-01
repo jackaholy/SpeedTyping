@@ -12,7 +12,7 @@ public class Score {
 
     @Id
     @GeneratedValue
-    private Long playid; // TODO: Adjust to id
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "levelid", nullable = false)
@@ -21,28 +21,45 @@ public class Score {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "date", nullable = false) // TODO: submission date
-    private Date date;
+    @Column(name = "submissiondate", nullable = false)
+    private Date submissiondate;
 
-    @Column(name = "time", nullable = false)
-    private Double time; // TODO: time = WPM
+    @Column(name = "wpm", nullable = false)
+    private Double wpm;
 
     public Score() {
     }
 
-    public Score(String username, Date date, Double time) {
+    public Score(String username, Date submissiondate, Double wpm) {
         this.username = username;
-        this.date = date;
-        this.time = time;
+        this.submissiondate = submissiondate;
+        this.wpm = wpm;
     }
 
     @Override
     public String toString() {
         return "Score{" +
                 ", username='" + username + "'" +
-                ", date=" + date +
-                ", time=" + time +
-                "}"; // TODO: include id
+                ", date=" + submissiondate +
+                ", time=" + wpm +
+                ", id=" + id +
+                "}";
+    }
+
+    public Date getSubmissiondate() {
+        return submissiondate;
+    }
+
+    public void setSubmissiondate(Date submissiondate) {
+        this.submissiondate = submissiondate;
+    }
+
+    public Double getWpm() {
+        return wpm;
+    }
+
+    public void setWpm(Double wpm) {
+        this.wpm = wpm;
     }
 
     /**
@@ -50,15 +67,15 @@ public class Score {
      * @return true if the score is valid for saving, false if not
      */
     public boolean isValid() {
-        return level != null && username != null && date != null && time != null;
+        return level != null && username != null && submissiondate != null && wpm != null;
     }
 
-    public Long getPlayid() {
-        return playid;
+    public Long getId() {
+        return id;
     }
 
-    public void setPlayid(Long playid) {
-        this.playid = playid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -69,20 +86,21 @@ public class Score {
         this.username = username;
     }
 
+    // TODO: Deprecate the following date and time getters and setters (we changed the name convention)
     public Date getDate() {
-        return date;
+        return submissiondate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate(Date submissiondate) {
+        this.submissiondate = submissiondate;
     }
 
     public Double getTime() {
-        return time;
+        return wpm;
     }
 
     public void setTime(Double time) {
-        this.time = time;
+        this.wpm = time;
     }
 
     public Level getLevel() {
@@ -101,12 +119,12 @@ public class Score {
             return false;
 
         final Score otherScore = (Score)o;
-        return playid.equals(otherScore.getPlayid());
+        return id.equals(otherScore.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(playid, username, date, time);
+        return Objects.hash(id, username, submissiondate, wpm);
     }
 
 }

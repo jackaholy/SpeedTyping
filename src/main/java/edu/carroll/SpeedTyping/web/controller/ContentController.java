@@ -4,8 +4,6 @@ package edu.carroll.SpeedTyping.web.controller;
 import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.model.TypeTest;
-import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
-import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
 import edu.carroll.SpeedTyping.service.ContentService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -54,7 +52,7 @@ public class ContentController {
         log.info("Chosen typing test: {}", selectedLevel.getLevelDifficultyName());
         // Add this data to a TypeTest and add this test to the model.
         TypeTest typeTest = new TypeTest();
-        typeTest.setCurrentLevel(selectedLevel.getLevelid());
+        typeTest.setCurrentLevel(selectedLevel.getId());
         model.addAttribute("typeTest", typeTest);
         return "typing";
     }

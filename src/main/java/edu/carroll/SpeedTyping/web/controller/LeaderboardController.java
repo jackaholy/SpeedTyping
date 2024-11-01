@@ -33,7 +33,7 @@ public class LeaderboardController {
      */
     @RequestMapping(value = "/leaderboard", method = RequestMethod.GET)
     public String showLeaderboard(@RequestParam Level.LevelDifficulty difficulty, Model model) {
-        List<Score> leaderboard = leaderboardService.getNScoresForDifficultySortByTime(difficulty, 50);
+        List<Score> leaderboard = leaderboardService.getNScoresForDifficultySortByWpm(difficulty, 50);
         model.addAttribute("leaderboard", leaderboard);
         log.info("Switched to page: Leaderboard");
         return "leaderboard";

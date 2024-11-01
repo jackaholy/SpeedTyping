@@ -5,6 +5,9 @@ build/
 !**/src/main/**/build/
 !**/src/typeTest/**/build/
 
+### logs ###
+logs/archived/
+
 ### STS ###
 .apt_generated
 .classpath
