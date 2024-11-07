@@ -3,7 +3,7 @@ DELETE FROM score;
 DELETE FROM level;
 
 -- Easy Levels (leveldifficulty = 1)
-INSERT INTO level (levelid, levelname, wordcount, leveldifficulty, content) VALUES
+INSERT INTO level (id, levelname, wordcount, leveldifficulty, content) VALUES
 (1, 'A Day at the Beach', 34, 'EASY', 'The sun shone brightly in the sky. The sand was warm under our feet. We built sandcastles and splashed in the waves. It was a perfect day.'),
 (2, 'The Lost Puppy', 32, 'EASY', 'Tom found a puppy in the park. The puppy was lost and hungry. He gave it water and took it home. His parents agreed to keep it. They named the puppy Buddy.'),
 (3, 'A Trip to the Zoo', 34, 'EASY', 'Jenny went to the zoo with her family. She saw lions, tigers, and bears. The monkeys were her favorite. They swung from the trees and made funny faces. She had a wonderful day.'),
@@ -16,7 +16,7 @@ INSERT INTO level (levelid, levelname, wordcount, leveldifficulty, content) VALU
 (10, 'Helping Grandma', 31, 'EASY', 'We visited Grandma on Sunday. We helped her in the garden. We planted flowers and watered them. She thanked us with cookies. We promised to come back soon.');
 
 -- Medium Levels (leveldifficulty = 2)
-INSERT INTO level (levelid, levelname, wordcount, leveldifficulty, content) VALUES
+INSERT INTO level (id, levelname, wordcount, leveldifficulty, content) VALUES
 (11, 'The Mountain Hike', 62, 'MEDIUM', 'Our family decided to hike up the mountain. The trail was steep and rocky. We saw birds and small animals along the way. The view from the top was breathtaking. We could see the entire valley below. We ate our lunch while enjoying the scenery. The hike down was easier. We were tired but happy after the adventure.'),
 (12, 'Science Fair Project', 59, 'MEDIUM', 'For the science fair, Lisa built a volcano model. She researched how volcanoes erupt. Using baking soda and vinegar, she demonstrated an eruption. Her project impressed the judges. She explained the science behind it confidently. She won first prize. Her parents were proud of her achievement. She inspired her classmates to explore science.'),
 (13, 'The School Play', 60, 'MEDIUM', 'The students prepared for the school play for weeks. They memorized lines and practiced their roles. The costumes were colorful and well-designed. On the night of the performance, the auditorium was full. The play was a success. The audience applauded loudly. The actors felt a great sense of accomplishment. They celebrated with a party afterwards.'),
@@ -29,7 +29,7 @@ INSERT INTO level (levelid, levelname, wordcount, leveldifficulty, content) VALU
 (20, 'The Mystery Book', 59, 'MEDIUM', 'Emily found an old book in the attic. It was a mystery novel she had never heard of. She began reading and couldn\'t put it down. The plot was intriguing. She solved the mystery along with the characters. It inspired her to write her own stories. She discovered a passion for writing.');
 
 -- Hard Levels (leveldifficulty = 3)
-INSERT INTO level (levelid, levelname, wordcount, leveldifficulty, content) VALUES
+INSERT INTO level (id, levelname, wordcount, leveldifficulty, content) VALUES
 (21, 'The Astronomer''s Discovery', 90, 'HARD', 'Dr. Thompson gazed through the powerful telescope, observing distant galaxies. The cosmos was vast and enigmatic. He noticed an unusual phenomenon—a star exhibiting irregular luminosity patterns. He hypothesized that it might be orbiting a black hole or perhaps being obscured by an exoplanet with a peculiar atmosphere. He recorded his observations meticulously. Sharing his findings with colleagues, they debated the possible explanations. Further analysis and peer reviews were necessary. This discovery could contribute significantly to astrophysics and our understanding of the universe.'),
 (22, 'The Invention of the Telegraph', 89, 'HARD', 'In the nineteenth century, Samuel Morse revolutionized communication with the invention of the telegraph. Utilizing electric signals transmitted over wires, messages could be sent across vast distances almost instantaneously. Morse code, a system of dots and dashes representing letters and numbers, was developed to encode these messages. The telegraph had profound impacts on society, facilitating rapid news dissemination and altering the dynamics of commerce and warfare. It marked the beginning of an era where information could traverse the globe at unprecedented speeds.'),
 (23, 'The Genetic Code Breakthrough', 88, 'HARD', 'The discovery of the DNA double helix structure by Watson and Crick was a monumental achievement in molecular biology. It unveiled the mechanism by which genetic information is stored and replicated. The pairing of nucleotide bases—adenine with thymine, and guanine with cytosine—explained how genetic instructions are preserved during cell division. This breakthrough laid the foundation for advances in genetics, biotechnology, and medicine. Understanding DNA\'s role enabled developments such as genetic engineering, genome sequencing, and targeted therapies for hereditary diseases.'),
