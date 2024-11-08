@@ -32,7 +32,6 @@ public class ContentServiceImplTest {
         contentService.saveLevel(level);
     }
 
-    // Happy
     @Test
     void getLevelsForLeveldifficulty_ValidInput() {
         // Act
@@ -65,13 +64,6 @@ public class ContentServiceImplTest {
     }
 
     @Test
-    void findByLevelid_NoneFound() {
-        Level result = contentService.findByLevelid(100);
-        assertNull("Expected null for non-existing level id, but got a level", result);
-    }
-
-    // Crappy
-    @Test
     @Transactional
     public void testSaveDuplicateLevelid() {
         Level level = new Level();
@@ -84,6 +76,12 @@ public class ContentServiceImplTest {
         contentService.saveLevel(level);
         // Because the levels have the same id, the original id should be overwritten by the new id
         assertEquals("The level name should have been updated", "Level 2", contentService.findByLevelid(level.getId()).getLevelname());
+    }
+
+    @Test
+    void findByLevelid_NoneFound() {
+        Level result = contentService.findByLevelid(100);
+        assertNull("Expected null for non-existing level id, but got a level", result);
     }
 
     @Test
