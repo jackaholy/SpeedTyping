@@ -47,27 +47,6 @@ class ScoreTest {
         Score score = new Score("1", new Date(), null);
         assertFalse(score.isValid(), "isValid() should return false when time is null.");
     }
-//
-//    @Test
-//    void testGetPlayid_ReturnsCorrectPlayid() {
-//        Long expectedPlayid = 12345L;
-//        score = new Score();
-//        score.setPlayid(expectedPlayid);
-//
-//        Long actualPlayid = score.getPlayid();
-//
-//        assertEquals(expectedPlayid, actualPlayid, "getPlayid() should return the correct playid value.");
-//    }
-
-//    @Test
-//    void testGetPlayid_ReturnsNullWhenPlayidNotSet() {
-//        score = new Score();
-//
-//        Long actualPlayid = score.getPlayid();
-//
-//        // Assert
-//        assertNull(actualPlayid, "getPlayid() should return null if playid is not set.");
-//    }
 
     @Test
     void testHashCode_ConsistentHashCode() {
@@ -76,12 +55,24 @@ class ScoreTest {
         assertEquals(hashCode1, hashCode2, "hashCode() should return the same value on multiple calls with the same state.");
     }
 
-    // Crazy path tests
     @Test
-    public void testNullScore() {
-        Score s = new Score(null, null, null);
-        assertNull(s.getUsername());
-        assertNull(s.getSubmissiondate());
-        assertNull(s.getWpm());
+    void equals_ObjectComparisonEqual() {
+        Score scoreCopy = score;
+        assertEquals(score, scoreCopy, "equals() should return true when comparing to the same object.");
+    }
+
+    @Test
+    void equals_ObjectComparisonNotEqual() {
+        Score newScore = new Score();
+        newScore.setUsername("Patrick Mahomes");
+        newScore.setLevel(score.getLevel());
+        newScore.setDate(score.getDate());
+        newScore.setTime(score.getTime());
+        assertNotEquals(score, newScore, "equals() should return false when the usernames do not match.");
+    }
+
+    @Test
+    void equals_NullComparison() {
+        assertNotEquals(null, score, "equals() should return false when comparing to null.");
     }
 }

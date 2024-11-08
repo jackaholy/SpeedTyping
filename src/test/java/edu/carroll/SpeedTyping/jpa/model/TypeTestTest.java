@@ -6,34 +6,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+/**
+ * Currently, there is no logic to be tested in TypeTest.java because it's being used just to carry information from the frontend (typing test HTML/javascript) to the backend (java)
+ */
 @SpringBootTest
 public class TypeTestTest {
-
-    private TypeTest testObject;
-
-    @BeforeEach
-    void setUp() {
-        testObject = new TypeTest();
-    }
-
-    @Test
-    void testUsername() {
-        testObject.setUsername("TestUser");
-        assertEquals("TestUser", testObject.getUsername());
-    }
-
-    @Test
-    void testTime() {
-        Double testTime = 15.2;
-        testObject.setTime(testTime);
-        assertEquals(testTime, testObject.getTime());
-    }
-
-    @Test
-    void testCurrentLevel() {
-        Integer testLevel = 3;
-        testObject.setCurrentLevel(testLevel);
-        assertEquals(testLevel, testObject.getCurrentLevel());
-    }
-
 }

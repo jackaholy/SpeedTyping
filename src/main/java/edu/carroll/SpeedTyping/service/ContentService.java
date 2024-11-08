@@ -11,12 +11,33 @@ import java.util.SequencedCollection;
  * ContentService interface provides methods to retrieve content (level or levels) for a typing test.
  */
 public interface ContentService {
-    /** Get a list of levels for the specified level difficulty */
+    /**
+     * Return the levels for the given level difficulty.
+     *
+     * @param leveldifficulty EASY, MEDIUM, or HARD. As of writing this, there are 10 of each of these levels.
+     * @return The levels that match the given level difficulty, returns empty list if null is passed in or if no levels are found.
+     */
     List<Level> getLevelsForLeveldifficulty(Level.LevelDifficulty leveldifficulty);
-    /** Grab levels matching the given level id. Returns null if none is found **/
+
+    /**
+     * Find a level using level id
+     *
+     * @param currentLevel is the level id that will be searched for
+     * @return The level that matches the given level id, return null if none are found
+     */
     Level findByLevelid(Integer currentLevel);
-    /** Save a score to the repository. Check for valid input **/
+
+    /**
+     * Save a score to the repository. Check for valid input.
+     *
+     * @param score is the score to be saved.
+     */
     void saveScore(Score score);
-    /** Save a level to the repository. Check for valid input **/
+
+    /**
+     *  Save a level to the repository. Check for valid input
+     *
+     * @param level is the level to be saved.
+     */
     void saveLevel(Level level);
 }

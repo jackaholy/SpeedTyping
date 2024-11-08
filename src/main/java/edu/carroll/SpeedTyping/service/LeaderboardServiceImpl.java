@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Service class that implements the LeaderboardService interface and retrieves leaderboard information.
@@ -79,6 +78,9 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     @Override
     public List<Score> getNScoresForDifficultySortByWpm(Level.LevelDifficulty leveldifficulty, int n) {
         log.info("getNScoresForDifficultySortByWpm: Retrieving {} scores for difficulty {}", n, leveldifficulty);
+        if (leveldifficulty == null) {
+            return new LinkedList<>();
+        }
         if (n < 0) {
             throw new IllegalArgumentException("n must be greater than or equal to 0");
         }
@@ -92,14 +94,5 @@ public class LeaderboardServiceImpl implements LeaderboardService {
             score.setWpm(Math.round(score.getWpm() * Math.pow(10, DECIMALS)) / Math.pow(10, DECIMALS));
         }
         return subList;
-    }
-
-    /**
-     * Retrieves all levels from the database.
-     *
-     * @return List of Level objects representing all levels stored in the database.
-     */
-    public List<Level> getAllLevels() {
-        return levelRepository.findAll();
     }
 }

@@ -4,26 +4,33 @@ import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "score")
 public class Score {
     private static final long serialVersionUID = 1L;
+    private static final Logger log = LoggerFactory.getLogger(Score.class);
 
     @Id
     @GeneratedValue
     private Long id;
 
+    /** This is the level the user was playing when they attained this score. */
     @ManyToOne
     @JoinColumn(name = "levelid", nullable = false)
     private Level level;
 
+    /** This is what the player input for username when prompted at the end of the typing test. */
     @Column(name = "username", nullable = false)
     private String username;
 
+    /** This is the timestamp for when the user submitted their typing test. */
     @Column(name = "submissiondate", nullable = false)
     private Date submissiondate;
 
+    /** Correct words typed per minute. */
     @Column(name = "wpm", nullable = false)
     private Double wpm;
 
@@ -63,7 +70,7 @@ public class Score {
     }
 
     /**
-     * Tells us if the current score is valid for saving
+     * Tells us if the current score is valid for saving. Valid for saving means all fields that will be saved (except ID) are not null. ID will be set by mysql.
      * @return true if the score is valid for saving, false if not
      */
     public boolean isValid() {
@@ -117,9 +124,24 @@ public class Score {
             return true;
         if (o == null || getClass() != o.getClass())
             return false;
-
         final Score otherScore = (Score)o;
-        return id.equals(otherScore.getId());
+        if (!this.isValid() || !otherScore.isValid()) {
+            log.warn("equals: invalid scores were compared for equality");
+            return false;
+        }
+        if (!this.username.equals(otherScore.username)) {
+            return false;
+        }
+        if (!this.submissiondate.equals(otherScore.submissiondate)) {
+            return false;
+        }
+        if (!this.wpm.equals(otherScore.wpm)) {
+            return false;
+        }
+        if (!this.level.equals(otherScore.level)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

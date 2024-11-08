@@ -5,6 +5,7 @@ import edu.carroll.SpeedTyping.jpa.model.Level;
 import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.model.TypeTest;
 import edu.carroll.SpeedTyping.service.ContentService;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,10 @@ public class ContentController {
      * @return The name of the template to render for the typing content.
      */
     @RequestMapping(value = "/typing", method = RequestMethod.GET)
-    public String typingContent(@RequestParam Level.LevelDifficulty difficulty, Model model) {
+    public String typingContent(@RequestParam Level.LevelDifficulty difficulty, HttpServletResponse response, Model model) {
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        response.setHeader("Pragma", "no-cache"); // Older browsers
+        response.setHeader("Expires", "0"); // Makes sure it expires right away
         // Get the levels for the level difficulty and pick a random level
         final Random random = new Random();
         List<Level> selectedLevels = contentService.getLevelsForLeveldifficulty(difficulty);
@@ -52,7 +56,7 @@ public class ContentController {
         log.info("Chosen typing test: {}", selectedLevel.getLevelDifficultyName());
         // Add this data to a TypeTest and add this test to the model.
         TypeTest typeTest = new TypeTest();
-        typeTest.setCurrentLevel(selectedLevel.getId());
+        typeTest.setLevelId(selectedLevel.getId());
         model.addAttribute("typeTest", typeTest);
         return "typing";
     }
@@ -75,7 +79,7 @@ public class ContentController {
             // Add data from the test into a score object, then save to the database
             Score score = new Score();
             score.setUsername(typeTest.getUsername());
-            testedLevel = contentService.findByLevelid(typeTest.getCurrentLevel());
+            testedLevel = contentService.findByLevelid(typeTest.getLevelId());
             score.setLevel(testedLevel);
             // Process our data to calculate date, accuracy, and time
             score.setDate(Calendar.getInstance().getTime());

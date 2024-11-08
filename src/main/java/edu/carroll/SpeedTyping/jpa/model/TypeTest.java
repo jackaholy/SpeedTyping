@@ -1,12 +1,17 @@
 package edu.carroll.SpeedTyping.jpa.model;
 
 /**
- * A test will store the data we need from one play of the typing test
+ * A test will store the data we need from one play of the typing test. As of writing this, this class is used to transfer
+ * tested information to the backend java controller where logic and database storage is done.
  */
 public class TypeTest {
+    /** The name of the user as determined by a prompt that appears at the end of each test.  */
     private String username;
+    /** How long it took the player to type until the length of typed content matched the length of the target content currently measured by characters. */
     private Double time;
-    private Integer currentLevel;
+    /** The id of the level that was played during the typing test. */
+    private Integer levelId;
+    /** The string representing the content typed by the user. */
     private String typedContent;
 
     public TypeTest() {
@@ -18,7 +23,7 @@ public class TypeTest {
         return "Test{" +
                 "username='" + username + '\'' +
                 ", time=" + time +
-                ", currentLevel=" + currentLevel +
+                ", levelId=" + levelId +
                 ", typedContent='" + typedContent + '\'' +
                 '}';
     }
@@ -39,12 +44,12 @@ public class TypeTest {
         this.time = time;
     }
 
-    public Integer getCurrentLevel() {
-        return currentLevel;
+    public Integer getLevelId() {
+        return levelId;
     }
 
-    public void setCurrentLevel(Integer currentLevel) {
-        this.currentLevel = currentLevel;
+    public void setLevelId(Integer levelId) {
+        this.levelId = levelId;
     }
 
     public String getTypedContent() {
