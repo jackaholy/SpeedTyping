@@ -62,7 +62,7 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public void saveScore(Score score) {
         if (!score.isValid()) {
-            log.error("saveScore: This score is deemed invalid by self check");
+            log.error("saveScore: This score is deemed invalid by self check"); // TODO: Check to make sure this works
             return;
         }
         double wpm = score.getWpm();

@@ -47,6 +47,24 @@ public class ContentServiceImplTest {
     }
 
     @Test
+    void getLevelsForLeveldifficulty_NoMatchingDifficulty() {
+        // Act
+        List<Level> returnedLevels = contentService.getLevelsForLeveldifficulty(Level.LevelDifficulty.HARD);
+
+        // Assert
+        assertTrue("Expected an empty list of levels for non-existing difficulty level, but got a list", returnedLevels.isEmpty());
+    }
+
+    @Test
+    public void getLevelsForLeveldifficulty_NullInput() {
+        // Act
+        List<Level> emptyList = new LinkedList<>();
+
+        // Assert
+        assertEquals("Searching for 'null' level difficulty did not return and empty list", emptyList, contentService.getLevelsForLeveldifficulty(null));
+    }
+
+    @Test
     void findByLevelid_NoneFound() {
         Level result = contentService.findByLevelid(100);
         assertNull("Expected null for non-existing level id, but got a level", result);
@@ -69,26 +87,8 @@ public class ContentServiceImplTest {
     }
 
     @Test
-    public void getLevelsForLeveldifficulty_NullInput() {
-        // Act
-        List<Level> emptyList = new LinkedList<>();
-
-        // Assert
-        assertEquals("Searching for 'null' level difficulty did not return and empty list", emptyList, contentService.getLevelsForLeveldifficulty(null));
-    }
-
-    @Test
     public void findByLevelid_NegativeInput() {
         Level result = contentService.findByLevelid(-1);
         assertNull("Expected null for non-existing level id, but got a level", result);
-    }
-
-    @Test
-    void getLevelsForLeveldifficulty_NoMatchingDifficulty() {
-        // Act
-        List<Level> returnedLevels = contentService.getLevelsForLeveldifficulty(Level.LevelDifficulty.HARD);
-
-        // Assert
-        assertTrue("Expected an empty list of levels for non-existing difficulty level, but got a list", returnedLevels.isEmpty());
     }
 }

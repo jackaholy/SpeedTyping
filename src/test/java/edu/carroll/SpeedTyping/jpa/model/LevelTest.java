@@ -30,8 +30,6 @@ class LevelTest {
         assertEquals("MEDIUM", level.getLevelDifficultyName());
     }
 
-    // Crappy path tests
-
     // Crazy path tests
     @Test
     public void testNullLevel() {
