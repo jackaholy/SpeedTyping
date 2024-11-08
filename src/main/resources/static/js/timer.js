@@ -38,13 +38,22 @@ document.addEventListener('DOMContentLoaded', function () {
         timeRef.innerHTML = `${m} : ${s} : ${ms}`;
     }
 
+    function countSpaces(str) {
+        const matches = str.match(/ /g);
+        return matches ? matches.length : 0;
+    }
+
     // Start timer when user begins typing
     userContent.addEventListener("input", () => {
         if (interval === null) {
             interval = setInterval(displayTimer, 10);
         }
-        // Stop the timer if the text length matches
-        if (userContent.value.length === targetString.length) {
+
+        // Stop the timer if the number of spaces matches
+        let userSpaces = countSpaces(userContent.value);
+        let targetSpaces = countSpaces(targetString);
+
+        if (userSpaces === targetSpaces) {
             let form = document.getElementById('testForm');
             let event = new Event('submit', {
                 bubbles: true,
