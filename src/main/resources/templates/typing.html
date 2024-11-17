@@ -71,7 +71,7 @@
     <form id="testForm" action="#" th:action="@{/addData}" th:object="${typeTest}" method="post">
         <div id="targetContent" class="target-content"></div>
         <div class="typing_area">
-        <textarea style = "width: 100%; height: 200px;; resize:none;" id="userContent" name="typedContent"
+        <textarea style = "width: 100%; height: 200px;; resize:none;" id="userContent" autocomplete="off" name="typedContent"
                   placeholder="Start Typing Here..." onpaste="return false;"></textarea>
         </div>
         <input type="hidden" th:field="*{levelId}">
