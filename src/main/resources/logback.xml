@@ -6,7 +6,7 @@
         </encoder>
     </appender>
 
-    <property name="LOGS" value="./logs" />
+    <property name="LOGS" value="./logs"/>
 
     <appender name="Logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOGS}/spring-boot-logger.log</file>
@@ -28,12 +28,12 @@
     <!--    <logger name="edu.carroll.cs341" level="DEBUG"/>-->
 
     <!-- Reduce DB startup chatter -->
-    <logger name="org.hibernate" level="INFO" />
-    <logger name="com.zaxxer.hikari" level="INFO" />
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
 
     <!-- Default level is INFO -->
     <root level="INFO">
-        <appender-ref ref="Console" />
-        <appender-ref ref="Logfile" />
+        <appender-ref ref="Console"/>
+        <appender-ref ref="Logfile"/>
     </root>
 </configuration>
