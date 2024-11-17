@@ -21,11 +21,6 @@ class ScoreTest {
     }
 
     @Test
-    public void testIsValid() {
-        assertTrue(score.isValid());
-    }
-
-    @Test
     void testIsValid_AllFieldsNotNull() {
         assertTrue(score.isValid(), "isValid() should return true when all fields are not null.");
     }
@@ -51,13 +46,18 @@ class ScoreTest {
     @Test
     void testHashCode_ConsistentHashCode() {
         int hashCode1 = score.hashCode();
+        // TODO: create two different objects, same properties, check for false.
         int hashCode2 = score.hashCode();
         assertEquals(hashCode1, hashCode2, "hashCode() should return the same value on multiple calls with the same state.");
     }
 
     @Test
     void equals_ObjectComparisonEqual() {
-        Score scoreCopy = score;
+        Score scoreCopy = new Score();
+        scoreCopy.setUsername(score.getUsername());
+        scoreCopy.setLevel(score.getLevel());
+        scoreCopy.setDate(score.getDate());
+        scoreCopy.setTime(score.getTime());
         assertEquals(score, scoreCopy, "equals() should return true when comparing to the same object.");
     }
 
