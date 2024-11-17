@@ -28,7 +28,7 @@ import java.util.List;
 public class ContentController {
     private static final Logger log = LoggerFactory.getLogger(ContentController.class);
 
-    public final ContentService contentService;
+    private final ContentService contentService;
 
     public ContentController(ContentService contentService) {
         this.contentService = contentService;
