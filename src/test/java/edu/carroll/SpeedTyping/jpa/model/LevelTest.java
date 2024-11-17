@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LevelTest {
     private static final Logger log = LoggerFactory.getLogger(LevelTest.class);
     
-    Level level;
+    private Level level;
     
     @BeforeEach
     public void setUp() {
