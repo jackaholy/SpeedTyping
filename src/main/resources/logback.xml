@@ -25,7 +25,7 @@
     </appender>
 
     <!-- Overwrite level for a internal code - Commented out for now -->
-    <!--    <logger name="edu.carroll.cs341" level="DEBUG"/>-->
+<!--        <logger name="edu.carroll.SpeedTyping.service.ContentServiceImpl" level="WARN"/>-->
 
     <!-- Reduce DB startup chatter -->
     <logger name="org.hibernate" level="INFO" />
