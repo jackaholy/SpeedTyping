@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let targetHTML = '';
     let charIndex = 0;
 
+    // Got these lines with help from chatgpt.com
     targetWords.forEach((word, wordIndex) => {
         for (let i = 0; i < word.length; i++) {
             targetHTML += `<span id="char-${charIndex}">${word[i]}</span>`;
