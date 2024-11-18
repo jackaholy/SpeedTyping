@@ -49,40 +49,40 @@ document.addEventListener('DOMContentLoaded', function () {
             interval = setInterval(displayTimer, 10);
         }
 
-// Stop the timer if the number of spaces matches
-let userSpaces = countSpaces(userContent.value);
-let targetSpaces = countSpaces(targetString);
+    // Stop the timer if the number of spaces matches
+    let userSpaces = countSpaces(userContent.value);
+    let targetSpaces = countSpaces(targetString);
 
-if (userSpaces >= targetSpaces) {
-    // Split both strings into arrays of words
-    let userWords = userContent.value.split(' ');
-    let targetWords = targetString.split(' ');
+    if (userSpaces >= targetSpaces) {
+        // Split both strings into arrays of words
+        let userWords = userContent.value.split(' ');
+        let targetWords = targetString.split(' ');
 
-    // Get the last word from each array
-    let userLastWord = userWords[userWords.length - 1];
-    let targetLastWord = targetWords[targetWords.length - 1];
+        // Get the last word from each array
+        let userLastWord = userWords[userWords.length - 1];
+        let targetLastWord = targetWords[targetWords.length - 1];
 
-    // Check if the lengths of the last words match
-    if ((userWords.length === targetWords.length && userLastWord.length === targetLastWord.length) || userWords + 1 > targetWords) {
-        let form = document.getElementById('testForm');
-        let event = new Event('submit', {
-            bubbles: true,
-            cancelable: true
-        });
-        let totalTime = minutes * 60 + seconds + milliseconds / 1000;
-        console.log("total time: ", totalTime);
+        // Check if the lengths of the last words match
+        if ((userWords.length === targetWords.length && userLastWord.length === targetLastWord.length) || userWords.length > targetWords.length + 1) {
+            let form = document.getElementById('testForm');
+            let event = new Event('submit', {
+                bubbles: true,
+                cancelable: true
+            });
+            let totalTime = minutes * 60 + seconds + milliseconds / 1000;
+            console.log("total time: ", totalTime);
 
-        const timeInput = document.createElement('input');
-        timeInput.type = 'hidden';
-        timeInput.name = 'time';
-        timeInput.value = totalTime;
-        form.appendChild(timeInput);
+            const timeInput = document.createElement('input');
+            timeInput.type = 'hidden';
+            timeInput.name = 'time';
+            timeInput.value = totalTime;
+            form.appendChild(timeInput);
 
-        form.dispatchEvent(event);
-        console.log('typing complete, submit test now');
-        clearInterval(interval);
-        interval = null;
+            form.dispatchEvent(event);
+            console.log('typing complete, submit test now');
+            clearInterval(interval);
+            interval = null;
+        }
     }
-}
     });
 });

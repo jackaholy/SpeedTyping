@@ -83,11 +83,11 @@ public class ContentController {
             score.setLevel(testedLevel);
             // Process our data to calculate date, accuracy, and time
             score.setDate(Calendar.getInstance().getTime());
-            double time = typeTest.getTime(); // Currently assuming the passed in time is the time for typing in seconds // TODO: Add null checking
+            double time = typeTest.getTime(); // Currently assuming the passed in time is the time for typing in seconds
             // Calculate the number of correct words typed
             int correctWordsTyped = calculateCorrectWordsTyped(typeTest.getTypedContent(), testedLevel.getContent());
             double wordsPerMinute = (correctWordsTyped / time) * 60;
-            score.setTime(wordsPerMinute);
+            score.setWpm(wordsPerMinute);
             contentService.saveScore(score);
             log.info("Saved score: {}", score);
         } catch (Exception ex) {
