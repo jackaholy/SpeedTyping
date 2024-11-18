@@ -3,7 +3,8 @@
 SpeedTyping is a competitive typing test targeted for ages 12-21 that provides new vocabulary and compelling stories in an engaging learning enviroment.
 SpeedTyping utilizes SpringBoot and JPA on the backend and Bootstrap on the frontend.
 
-
+<img width="500" alt="image (2)" src="https://github.com/user-attachments/assets/1fd9a809-baec-4f8a-8799-619df77197bc">
+<img width="500" height="300" alt="Image 11-18-24 at 11 29 AM" src="https://github.com/user-attachments/assets/80c23fdc-e171-4216-9197-46851ec5a1b0">
 
 ## Application Setup
 
