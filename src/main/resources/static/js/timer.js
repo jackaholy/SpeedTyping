@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', function () {
             interval = setInterval(displayTimer, 10);
         }
 
-    // Stop the timer if the number of spaces matches
     let userSpaces = countSpaces(userContent.value);
     let targetSpaces = countSpaces(targetString);
 
+    // Check to see if spaces match
     if (userSpaces >= targetSpaces) {
         // Split both strings into arrays of words
         let userWords = userContent.value.split(' ');
@@ -79,8 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
             form.appendChild(timeInput);
 
             form.dispatchEvent(event);
-            console.log('typing complete, submit test now');
+            // Stop the timer
             clearInterval(interval);
+            console.log('Typing complete. Timer has stopped.');
             interval = null;
         }
     }
