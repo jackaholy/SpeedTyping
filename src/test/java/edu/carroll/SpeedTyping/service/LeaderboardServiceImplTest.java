@@ -5,6 +5,7 @@ import edu.carroll.SpeedTyping.jpa.model.Score;
 import edu.carroll.SpeedTyping.jpa.repo.LevelRepository;
 import edu.carroll.SpeedTyping.jpa.repo.ScoreRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Null;
 import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,11 +45,13 @@ public class LeaderboardServiceImplTest {
         level.setLeveldifficulty(Level.LevelDifficulty.MEDIUM);
         level.setContent("Hi, this is a test");
         // Create two scores for this level
+        // Create first score
         Score score1 = new Score();
         score1.setLevel(level);
         score1.setTime(10.0);
         score1.setDate(new Date());
         score1.setUsername("andrew");
+        // Create second score
         Score score2 = new Score();
         score2.setLevel(level);
         score2.setTime(15.0);
@@ -60,8 +63,6 @@ public class LeaderboardServiceImplTest {
         scoreRepo.save(score2);
     }
 
-    // Happy
-
     @Test
     public void testGetScoresForLevelDifficulty() {
         List<Score> scores = leaderboardService.getScoresForLeveldifficulty(Level.LevelDifficulty.MEDIUM);
@@ -70,7 +71,21 @@ public class LeaderboardServiceImplTest {
         assertEquals("The retrieved level should have a difficulty of MEDIUM.", Level.LevelDifficulty.MEDIUM, scores.getFirst().getLevel().getLeveldifficulty());
     }
 
-    // Crappy
+    @Test
+    public void testGetScoresForLeveldifficulty_NoLevelsFound() {
+        // Retrieve scores for a difficulty with no levels
+        List<Score> scores = leaderboardService.getScoresForLeveldifficulty(Level.LevelDifficulty.HARD);
+        assertNotNull("Resulting list should not be null.", scores);
+        assertTrue("Resulting list should be empty.", scores.isEmpty());
+    }
+
+    @Test
+    public void testGetScoresForLeveldifficulty_NullDifficulty() {
+        // Retrieve scores with null difficulty
+        List<Score> scores = leaderboardService.getScoresForLeveldifficulty(null);
+        assertNotNull("Resulting list should not be null.", scores);
+        assertTrue("Resulting list should be empty.", scores.isEmpty());
+    }
 
     // getNScoresForDifficultySortByTime: Check handling of huge 'n'
     @Test
@@ -96,8 +111,6 @@ public class LeaderboardServiceImplTest {
         List<Score> emptyScores = new LinkedList<>();
         assertEquals("N scores retrieved for level difficulty medium should be an empty list", emptyScores, leaderboardService.getNScoresForDifficultySortByWpm(Level.LevelDifficulty.MEDIUM, 0));
     }
-
-    // Crazy
 
     // getNScoresForDifficultySortByTime: Check handling for when the program asks for negative scores
     @Test
