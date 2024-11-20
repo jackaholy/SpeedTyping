@@ -28,16 +28,16 @@ public interface ContentService {
     Level findByLevelid(Integer currentLevel);
 
     /**
-     * Save a score to the repository. Check for valid input.
+     * Save a score to the repository. This method checks for valid input.
      *
      * @param score is the score to be saved.
      */
-    void saveScore(Score score);
+    boolean saveScore(Score score);
 
     /**
-     *  Save a level to the repository. Check for valid input
+     *  Save a level to the repository. This method checks for valid input
      *
      * @param level is the level to be saved.
      */
-    void saveLevel(Level level);
+    boolean saveLevel(Level level);
 }

@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Event listener for user input
     const userContent = document.getElementById('userContent');
     userContent.addEventListener('input', function () {
-        const userInput = userContent.value.trim();
+        const userInput = userContent.value;
         const userWords = userInput.split(' ');
 
         // Reset colors for all spans
