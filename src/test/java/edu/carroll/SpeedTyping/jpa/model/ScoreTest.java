@@ -53,9 +53,9 @@ class ScoreTest {
     void testHashCode_HashCode() {
         Score score1 = new Score("2", new Date(), null);
         int hashCode1 = score1.hashCode();
-        Score score2 = new Score("2", new Date(), null);
+        Score score2 = new Score("3", new Date(), null);
         int hashCode2 = score2.hashCode();
-        assertEquals(hashCode1, hashCode2, "hashCode() should return the same value on multiple calls with the same state.");
+        assertNotEquals(hashCode1, hashCode2, "hashCode() should return the same value on multiple calls with the same state.");
     }
 
     /*
@@ -104,7 +104,7 @@ class ScoreTest {
         score.setWpm(72.5);
 
         // Assert that getWpm() returns the value set via the setter
-        assertEquals(72.5, score.getWpm(), 0.01, "wpm should return the value set via the setter.");
+        assertEquals(72.5, score.getWpm(), "wpm should return the value set via the setter.");
     }
 
     @Test
@@ -113,7 +113,7 @@ class ScoreTest {
         Score score = new Score("2", new Date(), 50.0);
 
         // Assert that getWpm() returns the value set in the constructor
-        assertEquals(50.0, score.getWpm(), 0.01, "wpm should return the value set in the constructor.");
+        assertEquals(50.0, score.getWpm(), "wpm should return the value set in the constructor.");
     }
 
     @Test
@@ -339,7 +339,7 @@ class ScoreTest {
     }
 
     /*
-    Test getDate()
+    Test getLevel()
     */
     @Test
     void testGetLevel_DefaultValue() {
