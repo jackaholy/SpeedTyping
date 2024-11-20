@@ -36,16 +36,6 @@ public class LeaderboardServiceImpl implements LeaderboardService {
     }
 
     /**
-     * Retrieves a list of scores for a specific level.
-     *
-     * @param level The level for which scores are to be retrieved.
-     * @return List of Score objects representing the scores for the specified level, ordered by wpm descending.
-     */
-    public List<Score> getScoresForLevel(Level level) {
-        return scoreRepository.findAllByLevelOrderByWpmDesc(level);
-    }
-
-    /**
      * Retrieves the scores for a specific level difficulty.
      *
      * @param leveldifficulty The difficulty level for which scores are to be retrieved.
@@ -62,7 +52,7 @@ public class LeaderboardServiceImpl implements LeaderboardService {
         List<Score> scores = new ArrayList<>();
         // now, extract the scores from the retrieved levels.
         for (Level level : diffLevels) {
-            scores.addAll(getScoresForLevel(level));
+            scores.addAll(scoreRepository.findAllByLevelOrderByWpmDesc(level));
         }
         return scores;
     }
