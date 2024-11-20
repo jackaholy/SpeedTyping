@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.util.AssertionErrors.*;
 
 import java.util.Calendar;
@@ -162,6 +163,18 @@ public class ContentServiceImplTest {
         Score score = new Score("a", Calendar.getInstance().getTime(), 50.0);
         score.setLevel(level);
         assertFalse("saveScore_InvalidUsernameLength: A score was passed in with a length of 1, which should be invalid and return false.", contentService.saveScore(score));
+    }
+
+    @Test
+    public void saveScore_LongUsernameLength() {
+        populateDatabase();
+        contentService.saveLevel(level);
+
+        // Represent the large string by its length
+        int largeLength = 1000000000;
+        Score score = new Score("LENGTH:" + largeLength, Calendar.getInstance().getTime(), 50.0);
+        score.setLevel(level);
+        assertFalse("saveScore_LongUsernameLength: A score was passed in with a length of 1000000000, which is invalid and should return false.", contentService.saveScore(score));
     }
 
     @Test
