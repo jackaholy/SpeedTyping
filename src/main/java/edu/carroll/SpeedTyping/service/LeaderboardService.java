@@ -9,13 +9,6 @@ import java.util.List;
  * Interface for retrieving leaderboard information.
  */
 public interface LeaderboardService {
-    /**
-     * Get scores for the chosen level
-     *
-     * @param level is the level we are searching with
-     * @return scores that were played on this level. 
-     */
-    List<Score> getScoresForLevel(Level level);
 
     /**
      * Get scores for the chosen level difficulty. As of writing this, there are 10 of each level difficulty. Null input will return an empty list.

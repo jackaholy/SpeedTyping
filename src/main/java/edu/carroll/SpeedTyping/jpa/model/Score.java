@@ -53,14 +53,6 @@ public class Score {
                 "}";
     }
 
-    public Date getSubmissiondate() {
-        return submissiondate;
-    }
-
-    public void setSubmissiondate(Date submissiondate) {
-        this.submissiondate = submissiondate;
-    }
-
     public Double getWpm() {
         return wpm;
     }
