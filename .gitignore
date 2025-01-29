@@ -4,9 +4,10 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/typeTest/**/build/
+.DS_Store
 
 ### logs ###
-logs/archived/
+logs/
 
 ### STS ###
 .apt_generated

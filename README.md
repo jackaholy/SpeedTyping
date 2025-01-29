@@ -50,6 +50,32 @@ MacOS: https://www.jetbrains.com/idea/download/?section=mac
 Linux: https://www.jetbrains.com/idea/download/?section=linux
 ```
 
+### Database Setup
+
+1. **Create a database** in MySQL (adjust name, user, and password as needed):
+```sql
+CREATE DATABASE SpeedTypingDB;
+USE SpeedTypingDB;
+```
+
+2. Source the population file from the project’s root directory:
+
+```bash
+mysql -u root -p SpeedTypingDB < levelData/CreateLevels.sql
+```
+
+Or within the MySQL prompt:
+
+```sql
+SOURCE src/main/resources/levelData/CreateLevels.sql;
+```
+
+3. Verify the tables and data by running
+
+```sql
+SELECT * FROM level;
+```
+
 ### Run the Application
 
 Now that you have everything installed, you are ready to run our program.
