@@ -23,7 +23,7 @@ public class Level {
     @Column(name = "wordcount", nullable = false)
     private Integer wordcount;
 
-    public enum LevelDifficulty{
+    public enum LevelDifficulty {
         EASY,
         MEDIUM,
         HARD
