@@ -29,30 +29,16 @@ https://www.oracle.com/java/technologies/downloads/
 git clone https://github.com/jackaholy/SpeedTyping
 ```
 
-4. Use an IDE:
-
-Eclipse:
-```bash
-Windows: https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2023-09/R/eclipse-java-2023-09-R-win32-x86_64.zip
-MacOS (Silicon): https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2023-09/R/eclipse-java-2023-09-R-macosx-cocoa-aarch64.dmg
-MacOS (Intel): https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2023-09/R/eclipse-java-2023-09-R-macosx-cocoa-x86_64.dmg
-Linux (x64): https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/2023-09/R/eclipse-java-2023-09-R-linux-gtk-x86_64.tar.gz
-```
-Visual Studio Code:
-```bash
-https://code.visualstudio.com/download
-```
-
-IntelliJ IDEA:
-```bash
-Windows: https://www.jetbrains.com/idea/download/?section=windows
-MacOS: https://www.jetbrains.com/idea/download/?section=mac
-Linux: https://www.jetbrains.com/idea/download/?section=linux
-```
-
 ### Database Setup
 
 1. **Create a database** in MySQL (adjust name, user, and password as needed):
+
+Login to mysql (configure password if not done so already)
+```shell
+mysql -u root -p
+```
+
+Create the database
 ```sql
 CREATE DATABASE SpeedTypingDB;
 USE SpeedTypingDB;
@@ -75,6 +61,8 @@ SOURCE src/main/resources/levelData/CreateLevels.sql;
 ```sql
 SELECT * FROM level;
 ```
+
+There should be 30 rows in the 'level' table. 
 
 ### Run the Application
 
