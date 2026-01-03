@@ -1,6 +1,30 @@
--- Remove current scores and levels
-DELETE FROM score;
-DELETE FROM level;
+-- Create the database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS speedtypingdb;
+USE speedtypingdb;
+
+-- Drop existing tables if they exist (to allow clean re-runs)
+DROP TABLE IF EXISTS score;
+DROP TABLE IF EXISTS level;
+
+-- Create the level table
+CREATE TABLE level (
+    id INT PRIMARY KEY,
+    levelname VARCHAR(100) NOT NULL,
+    wordcount INT NOT NULL,
+    leveldifficulty ENUM('EASY', 'MEDIUM', 'HARD') NOT NULL,
+    content TEXT NOT NULL
+);
+
+-- Create the score table
+CREATE TABLE score (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    userid INT NOT NULL,
+    levelid INT NOT NULL,
+    wpm DECIMAL(5,2) NOT NULL,
+    accuracy DECIMAL(5,2) NOT NULL,
+    completedat TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (levelid) REFERENCES level(id) ON DELETE CASCADE
+);
 
 -- Easy Levels (leveldifficulty = 1)
 INSERT INTO level (id, levelname, wordcount, leveldifficulty, content) VALUES
