@@ -8,7 +8,7 @@ SpeedTyping utilizes SpringBoot and JPA on the backend and Bootstrap on the fron
 
 ## Application Setup
 
-### Install Your Database
+### Prerequisites
 
 1. Install MySQL on your computer if you haven't already. 
 
