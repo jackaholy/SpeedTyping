@@ -47,7 +47,7 @@ USE SpeedTypingDB;
 2. Source the population file from the project’s root directory:
 
 ```bash
-mysql -u root -p SpeedTypingDB < levelData/CreateLevels.sql
+mysql -u root -p SpeedTypingDB < src/main/resources/levelData/CreateLevels.sql
 ```
 
 Or within the MySQL prompt:
